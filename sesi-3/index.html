@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>My Website</title>
+  </head>
+  <body class="bg-dark">
+    <div class="bg-dark container-fluid">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark pt-3 sticky-top">
+        <div class="container">
+          <h1>
+            <a href="#" class="navbar-brand">
+              Anfa<span class="text-warning fw-bold">riza.</span>
+            </a>
+          </h1>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navMenu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="#home" class="nav-link active">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="#about" class="nav-link">About</a>
+              </li>
+              <li class="nav-item">
+                <a href="#service" class="nav-link">Service</a>
+              </li>
+              <li class="nav-item">
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a href="#resume" class="nav-link">Resume</a>
+              </li>
+              <li class="nav-item">
+                <a href="#contact" class="nav-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Home -->
+      <section
+        id="home"
+        class="d-flex bg-dark text-light p-3 p-lg-0 pt-lg-3 text-center text-sm-start align-items-center justify-content-center"
+        style="min-height: 100vh; display: flex; align-items: center"
+      >
+        <div class="container">
+          <div
+            class="d-flex flex-lg-row align-items-center justify-content-between flex-sm-column-reverse flex-column-reverse"
+          >
+            <div class="col-lg-7 d-sm-block">
+              <div class="lh-lg">
+                <p class="text-warning mb-5">Hello Welcome</p>
+                <h1 class="mb-lg-3 fw-bold">
+                  I'm MUHAMMAD <span class="d-block mt-3">ANFARIZA</span>
+                </h1>
+              </div>
+              <p class="mb-5 lead text-secondary">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque repudiandae veritatis, vero corporis et accusantium voluptatum quae obcaecati hic, illo adipisci sapiente illum est consequuntur. Blanditiis eligendi facere architecto rerum?
+              </p>
+              <button class="btn btn-lg btn-warning mt-lg-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Ada yang bisa saya bantu?
+              </button>
+            </div>
+            <div class="img-about1 col-lg-5">
+              <img
+                src="Foto_profile.png"
+                class="img-about-item1 img-fluid"
+                alt="Foto Profil"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section
+        id="about"
+        class="about container-fluid text-light p-lg-0 text-center text-sm-start align-items-center justify-content-center"
+        style="min-height: 100vh; display: flex; align-items: center"
+      >
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="img-about2 col-lg-5 d-lg-flex d-sm-none d-none">
+              <img
+                src="Foto_profile.png"
+                class="img-about-item2 img-fluid"
+                alt="Foto Profil"
+              />
+            </div>
+            <div class="p-3 col-lg-6">
+              <h2 class="fw-bold mb-lg-5">
+                About <span class="text-warning">Me</span>
+              </h2>
+              <p class="my-3 lead text-secondary">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Expedita quisquam perferendis nulla, a repellendus dolore?
+              </p>
+              <p class="mt-3 lead text-secondary mb-lg-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Laudantium aperiam sit ipsum assumenda vitae? Esse.
+              </p>
+              <button class="btn btn-lg btn-warning">
+                Pelajari Lebih Lanjut
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Service -->
+      <section
+        id="service"
+        class="bg-dark text-light p-lg-0 pt-lg-3 text-center text-sm-start align-items-center justify-content-center"
+        style="min-height: 100vh; display: flex; align-items: center"
+      >
+        <div class="container">
+          <div class="m-auto">
+            <h2 class="text-center fw-bold mb-2">
+              My <span class="text-warning">Service</span>
+            </h2>
+            <p class="lead text-center mb-5 text-secondary">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Id unde, ut corporis minima illo commodi.
+            </p>
+          </div>
+          <div class="pt-3 pb-5">
+            <div class="row text-center g-4">
+              <div class="col-md">
+                <div class="card-service card bg-dark">
+                  <div class="card-body text-center">
+                    <div class="h1 mb-3 text-warning">
+                      <i class="bi bi-laptop"></i>
+                    </div>
+                    <h3 class="card-title text-light">Web Development</h3>
+                    <p class="card-text text-secondary">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quasi nesciunt itaque, aliquam nam reiciendis doloribus soluta recusandae sapiente earum et quod voluptatibus aspernatur consectetur unde dicta nulla perferendis, officiis rem facilis eaque natus quos possimus. Alias animi excepturi modi beatae exercitationem repellat consequatur. Numquam in eos aperiam quasi vitae!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="card-service card bg-dark">
+                  <div class="card-body text-center">
+                    <div class="h1 mb-3">
+                      <i class="bi bi-laptop text-warning"></i>
+                    </div>
+                    <h3 class="card-title text-light">Web Development</h3>
+                    <p class="card-text text-secondary">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quasi nesciunt itaque, aliquam nam reiciendis doloribus soluta recusandae sapiente earum et quod voluptatibus aspernatur consectetur unde dicta nulla perferendis, officiis rem facilis eaque natus quos possimus. Alias animi excepturi modi beatae exercitationem repellat consequatur. Numquam in eos aperiam quasi vitae!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="card-service card bg-dark text-light">
+                  <div class="card-body text-center">
+                    <div class="h1 mb-3">
+                      <i class="bi bi-laptop text-warning"></i>
+                    </div>
+                    <h3 class="card-title text-light">Web Development</h3>
+                    <p class="card-text text-secondary">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quasi nesciunt itaque, aliquam nam reiciendis doloribus soluta recusandae sapiente earum et quod voluptatibus aspernatur consectetur unde dicta nulla perferendis, officiis rem facilis eaque natus quos possimus. Alias animi excepturi modi beatae exercitationem repellat consequatur. Numquam in eos aperiam quasi vitae!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portofolio -->
+      <section
+        id="portfolio"
+        class="portfolio py-5"
+        style="min-height: 100vh; align-items: center"
+      >
+        <div class="offset-lg-3 col-lg-6 offset-sm-2 col-sm-8">
+          <div class="container">
+            <h2 class="fw-bold text-center text-light mb-2">
+              My <span class="text-warning">Portofolio</span>
+            </h2>
+            <p class="text-center lead text-secondary mb-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias repudiandae ipsam asperiores voluptas nam accusantium dolorem deleniti laborum nulla eum.
+            </p>
+          </div>
+          <div
+            id="carouselExampleCaptions"
+            class="container carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="Foto_profile.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>First slide label</h5>
+                  <p>
+                    Some representative placeholder content for the first slide.
+                  </p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="Foto_profile.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Second slide label</h5>
+                  <p>
+                    Some representative placeholder content for the second
+                    slide.
+                  </p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="Foto_profile.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Third slide label</h5>
+                  <p>
+                    Some representative placeholder content for the third slide.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section
+        id="resume"
+        class="bg-dark text-light p-lg-0 pt-lg-3 text-center text-sm-start align-items-center justify-content-center"
+        style="min-height: 100vh; display: flex; align-items: center"
+      >
+        <div class="container">
+          <div class="pt-3">
+            <h2 class="text-center fw-bold">
+              My <span class="text-warning">Experience</span>
+            </h2>
+            <p class="lead text-secondary text-center mb-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
+              exercitationem?
+            </p>
+          </div>
+          <div class="pt-3 pb-5">
+            <div class="row text-center g-4">
+              <div class="col-md">
+                <div class="card-resume card text-light">
+                  <div class="card-body text-center">
+                    <h5 class="fw-bold text-light">Juni-2023-2025</h5>
+                    <h4 class="card-title fw-bold text-warning">
+                      Front-end Web
+                    </h4>
+                    <p class="card-text text-secondary lead">Figma</p>
+                    <p class="card-text text-secondary lead">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Molestias, beatae.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="card-resume card text-light">
+                  <div class="card-body text-center">
+                    <h5 class="fw-bold text-light">Juni-2023-2025</h5>
+                    <h4 class="card-title fw-bold text-warning">Front-end Web</h4>
+                    <p class="card-text text-secondary lead">Figma</p>
+                    <p class="card-text text-secondary lead">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Molestias, beatae.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="card-resume card text-light">
+                  <div class="card-body text-center">
+                    <h5 class="fw-bold text-light">Juni-2023-2025</h5>
+                    <h4 class="card-title fw-bold text-warning">
+                      Front-end Web
+                    </h4>
+                    <p class="card-text text-secondary lead">Figma</p>
+                    <p class="card-text text-secondary lead">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Molestias, beatae.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section
+        id="contact"
+        class="contact align-items-center py-5"
+      >
+        <div class="container">
+          <div class="col-md">
+            <h2 class="text-light text-center mb-3">Contact <span class="text-warning">Me</span></h2>
+            <p class="lead text-center text-secondary mb-5">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi
+              impedit a vero consectetur minima? Autem?
+            </p>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 mb-4">
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item bg-dark text-light border border-warning rounded"
+                  >
+                    <span class="fw-bold">Address :</span> Indonesia
+                  </li>
+                  <li
+                    class="list-group-item bg-dark text-light border border-warning rounded"
+                  >
+                    <span class="fw-bold">Phone :</span> +628679008723
+                  </li>
+                  <li
+                    class="list-group-item bg-dark text-light border border-warning rounded"
+                  >
+                    <span class="fw-bold">E-mail :</span> absdefghi@gmail.com
+                  </li>
+                  <li
+                    class="list-group-item bg-dark text-light border border-warning rounded"
+                  >
+                    <span class="fw-bold">Website :</span> This is My website
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-sm-12 d-sm-block">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control bg-dark border-warning"
+                    placeholder="Nama"
+                    id="floatingTextarea"
+                  ></textarea>
+                  <label for="floatingTextarea" class="text-light"
+                    >Nama :
+                  </label>
+                </div>
+                <div class="form-floating my-2">
+                  <textarea
+                    class="form-control bg-dark border-warning"
+                    style="height: 100px"
+                    placeholder="Massage"
+                    id="floatingTextarea"
+                  ></textarea>
+                  <label for="floatingTextarea" class="text-light"
+                    >Deskripsi :
+                  </label>
+                </div>
+                <button type="button" class="btn btn-warning fw-bold">
+                  Contact Us
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Contact -->
+      <section class="about-contact pt-5">
+        <div class="container">
+          <div class="text-center text-light">
+            <h2 class="fw-bold">AboutMe.</h2>
+            <p class="lead text-center">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
+              eveniet velit ipsa pariatur itaque tempora.
+            </p>
+          </div>
+          <div>
+            <div class="h3 text-warning text-center">
+              <i class="bi bi-facebook"></i>
+              <i class="bi bi-instagram mx-2"></i>
+              <i class="bi bi-twitter"></i>
+              <i class="bi bi-linkedin mx-2"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Tuliskan pesan Anda!
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="nama" class="col-form-label">Nama : </label>
+                <input type="text" class="form-control" id="nama">
+              </div>
+              <div class="mb-3">
+                <label for="handphone" class="col-form-label">No. HP : </label>
+                <input type="number" class="form-control" id="handphone">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="col-form-label">Email : </label>
+                <input type="email" class="form-control" id="email">
+              </div>
+              <div class="mb-3">
+                <label for="pesan" class="col-form-label">Pesan : </label>
+                <textarea class="form-control" id="pesan"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

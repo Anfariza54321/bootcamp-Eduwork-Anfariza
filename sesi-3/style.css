@@ -1,0 +1,50 @@
+body {
+  font-family: "Lexend Deca", serif;
+}
+.img-about1 {
+  border: 10px gold solid;
+  margin: 20px;
+  border-radius: 20px;
+}
+.img-about-item1 {
+  position: relative;
+  height: auto;
+  width: 900px;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 20px;
+}
+.img-about2 {
+  border: 10px gold solid;
+  margin: 20px;
+  border-radius: 20px;
+}
+.img-about-item2 {
+  position: relative;
+  height: auto;
+  width: 900px;
+  left: 30px;
+  bottom: 30px;
+  border-radius: 20px;
+}
+.about {
+  background-color: #000000 !important;
+}
+.portfolio {
+  background-color: #000000 !important;
+}
+.contact {
+  background-color: #000000 !important;
+}
+.about-contact {
+  background-color: #000000 !important;
+}
+.navbar {
+  opacity: 60% !important;
+}
+.card-service {
+  background-color: #333333 !important;
+}
+.card-resume {
+    background: #333333 !important;
+}
