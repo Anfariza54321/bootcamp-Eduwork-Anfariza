@@ -1,0 +1,346 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Segou-Ui", sans-serif;
+}
+body {
+  background-color: white;
+  color: black;
+  align-content: center;
+  width: 100%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #00aeff;
+  color: white;
+}
+.navbar h1 {
+  transition: 3s ease;
+}
+.navbar h1:hover {
+  transform: scale(1.2);
+}
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+.navbar ul li {
+  margin-left: 20px;
+  text-decoration-line: none;
+}
+.navbar ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  margin-left: 10px;
+  position: relative;
+}
+.navbar ul li a::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  height: 2.5px;
+  background-color: white;
+  transition: 0.3s;
+  transform: scaleX(0);
+  width: 100%;
+}
+.navbar ul li a:hover::before {
+  transform: scaleX(1);
+}
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.header {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.header h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.header p {
+  margin-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+.header a {
+  margin-left: 130px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 50%;
+  position: relative;
+  display: block;
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #00aeff;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.header a span {
+  position: relative;
+  z-index: 2;
+  transition: 1s;
+}
+.header a:hover span {
+  color: #fff;
+}
+.header a .wave {
+  position: absolute;
+  top: calc(100% + 22px);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00aeff;
+  transition: 1s;
+}
+.header a:hover .wave {
+  top: 0;
+}
+a .wave::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 100%;
+  height: 22px;
+  background: url(wave.png);
+  animation: animate 0.5s linear infinite;
+}
+@keyframes animate {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 118px;
+  }
+}
+.header-image {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  width: 650px;
+  height: 450px;
+}
+.header-image img {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: 25px;
+  margin-top: 25px;
+  border-radius: 8px;
+}
+.container-biodata {
+  margin-top: 30px;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.biodata-head h2 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.biodata-head p {
+  margin-bottom: 20px;
+}
+.biodata-content .item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+.biodata-content .item div p {
+  font-size: 18px;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  border: none;
+}
+.biodata-content .item div p span {
+  font-weight: bold;
+  color: #00aeff;
+}
+.container-portofolio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+.head-portofolio {
+  text-align: center;
+  margin: 10px;
+}
+.head-portofolio h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.head-portofolio p {
+  margin-bottom: 20px;
+}
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  height: auto;
+}
+.card div {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.card div img {
+  border-radius: 8px;
+  padding: 5px;
+  transition: 0.3s ease;
+}
+.card div img:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+.card div h3 {
+  margin: 10px;
+}
+div small {
+  display: block;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+  background-color: #00aeff;
+  border-radius: 8px;
+}
+small {
+  padding: 20px;
+  color: white;
+}
+@media (max-width: 500px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .navbar ul {
+    flex-direction: column;
+  }
+  .navbar ul li {
+    margin: 10px;
+  }
+  .container-header {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .header a {
+    margin-left: 90px;
+  }
+  .header-image {
+    height: auto;
+    margin-top: 20px;
+  }
+  .header-image img {
+    width: 400px;
+    height: auto;
+  }
+  .container-biodata {
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .biodata-content .item {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .card div img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+@media (max-width: 884px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .navbar ul {
+    flex-direction: column;
+  }
+  .navbar ul li {
+    margin: 10px;
+  }
+  .container-header {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .header a {
+    margin-left: 180px;
+  }
+  .header-image {
+    height: auto;
+    margin-top: 20px;
+  }
+  .container-biodata {
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .biodata-content .item {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .container-header {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .header a {
+    margin-bottom: 20px;
+  }
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
