@@ -1,0 +1,80 @@
+body {
+  font-family: "Playfair", serif;
+}
+.navbar {
+  background: #c4c4c4 !important;
+}
+.navbar-brand {
+  color: #07484a !important;
+}
+.nav-item a {
+  color: #70908b !important;
+  transition: 0.3 ease;
+}
+.bi {
+  color: #07484a !important;
+}
+.nav-item a:hover {
+  color: #07484a !important;
+}
+
+.hero {
+  background-color: #c4c4c4 !important;
+}
+section h1 {
+  color: #07484a !important;
+}
+section p {
+  color: #07484a !important;
+}
+section button {
+  background: #07484a !important;
+}
+.categories {
+  background-color: #70908b !important;
+  transition: 1s ease;
+}
+.categories:hover {
+  background: #07484a !important;
+}
+
+.card-title {
+  height: 45px; /* Sesuaikan agar cukup untuk 2 baris */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.card-text-description {
+  height: 60px; /* Sesuaikan tinggi deskripsi */
+  font-size: 0.9rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.side-bar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.side-bar-item {
+  color: #70908b !important;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#produkList .col-md-4 {
+  animation: fadeIn 0.5s ease forwards;
+}
