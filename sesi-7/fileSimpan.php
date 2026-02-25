@@ -20,6 +20,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // PINDAHKAN FILE: Dari tempat sementara ke folder proyek Anda
     move_uploaded_file($lokasi_temp, $folder_tujuan);
 }
+
+// validation form
+$name_sepatuErr = $merekErr = $hargaErr = $jumlahErr = "";
+$name_sepatu = $merek = $harga = $jumlah = $deskripsi = "";
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return$data;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name_sepatu"])) {
+        $name_sepatuErr = "Name is required";
+    } else {
+        $name_sepatu = test_input($_POST["name_sepatu"]);
+    }
+
+    if (empty($_POST["merek_select"])) {
+        $merekErr = "Merek is required";
+    } else {
+        $merek = test_input($_POST["merek_select"]);
+    }
+
+    if (empty($_POST["deskripsi_input"])) {
+        $deskripsi = "";
+    } else {
+        $deskripsi = test_input($_POST["deskripsi_input"]);
+    }
+
+    if (empty($_POST["price_input"])) {
+        $harga = "";
+    } else {
+        $harga = test_input($_POST["price_input"]);
+    }
+
+    if (empty($_POST["total_input"])) {
+        $jumlahErr = "Jumlah is required";
+    } else {
+        $jumlah = test_input($_POST["total_input"]);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
