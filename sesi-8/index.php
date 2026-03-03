@@ -1,12 +1,12 @@
 <?php
 
-require 'functions.php';
+require __DIR__ . '/functions.php';
 
 $produk = query("SELECT * FROM products");
 
 // Tombol filter diklik
-if (isset ($_POST ["filter"])) {
-    $produk = filter_dan_harga ($_POST["keyword"], $_POST["merek"], $_POST["sort_harga"]);
+if (isset($_POST["filter"])) {
+    $produk = filter_dan_harga($_POST["keyword"], $_POST["merek"], $_POST["sort_harga"]);
 }
 
 ?>
@@ -18,7 +18,7 @@ if (isset ($_POST ["filter"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MySql to PHP</title>
+    <title>Home</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -37,6 +37,10 @@ if (isset ($_POST ["filter"])) {
         form button {
             background-color: #70908b !important;
         }
+
+        form button:hover {
+            background: #07484a !important;
+        }
     </style>
 
 </head>
@@ -47,11 +51,11 @@ if (isset ($_POST ["filter"])) {
 
         <div class="container my-3">
             <form action="" method="post" class="mb-3">
-                <div class="row g-2 justify-content-center align-items-end">
-                    <div class="col-4">
+                <div class="row g-2 mb-4 align-items-end">
+                    <div class="col-4 col-md-3">
                         <input type="text" class="form-control border-0 rounded p-2" placeholder="Search....." name="keyword" autofocus autocomplete="off">
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 col-md-3">
                         <select class="form-select" name="merek" aria-label="Default select example">
                             <option value="" selected>Open this select Merek</option>
                             <option value="Adidas">Adidas</option>
@@ -63,15 +67,15 @@ if (isset ($_POST ["filter"])) {
                             <option value="Ortuseight">Ortuseight</option>
                         </select>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 col-md-3">
                         <select class="form-select" aria-label="Default select example" name="sort_harga">
                             <option value="ASC" selected>Open this select Category</option>
                             <option value="ASC">Harga Terendah</option>
                             <option value="DESC">Harga Tertinggi</option>
                         </select>
                     </div>
-                    <div class="container col-2">
-                        <button type="submit" name="filter" class="btn btn-dark w-100">Filter</button>
+                    <div class="container col-2 col-md-2">
+                        <button type="submit" name="filter" class="btn btn-dark w-100 border-0 fw-bold">Filter</button>
                     </div>
                 </div>
             </form>
