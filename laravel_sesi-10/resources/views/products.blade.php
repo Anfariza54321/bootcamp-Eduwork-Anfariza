@@ -1,4 +1,7 @@
-<x-layout>
-  <x-slot:title>{{ $title }}</x-slot:title>
-    <p>Apakah ini Product?</p>
-</x-layout>
+@extends('components.layout')
+
+@section('title', 'products')
+
+@section('content')
+    @include('components.product-list')
+@endsection

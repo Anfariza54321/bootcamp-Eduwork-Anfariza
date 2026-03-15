@@ -1,19 +1,36 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home', ['title' => 'Home']);
+    return view('home');
 });
 
-Route::get('/products', function () {
-    return view('products', ['title' => 'Product']);
-});
+Route::get(
+    '/products',
+    [ProductController::class, 'index']
+)->name('products.index');
 
-Route::get('/carts', function () {
-    return view('carts', ['title' => 'Carts']);
-});
+Route::get(
+    '/product-detail/{id}',
+    [ProductController::class, 'show']
+);
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+
+// Route::get('/carts', function () {
+//     return view('carts');
+// });
+
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+
+// Route untuk menambah ke keranjang
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('carts.add');
+
+// Route untuk melihat isi keranjang
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/carts', [CartController::class, 'index']);
+
+// Pastikan namanya 'cart.remove' sesuai dengan yang dipanggil di Blade
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');

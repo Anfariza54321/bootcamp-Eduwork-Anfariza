@@ -1,4 +1,7 @@
-<x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
-    <p>Apakah berhasil?</p>
-</x-layout>
+@extends('components.layout')
+
+@section('title', 'Home')
+
+@section('content')
+    @include('components.home-page')
+@endsection
