@@ -122,8 +122,14 @@
                             {{-- <input type="hidden" name="image" value="{{ $item['gambar'] }}"> --}}
 
                             <button type="submit"
-                                class="rounded-md bg-purple-100/30 px-3 py-2 text-xs font-semibold text-purple-300 hover:bg-purple-500/30 hover:text-purple-100 transition focus:outline-none focus:ring-2 focus:ring-purple-300">
-                                Add to Cart
+                                class="flex items-center rounded-md bg-purple-100/30 px-3 py-2 text-xs font-semibold text-purple-300 hover:bg-purple-500/30 hover:text-purple-100 transition focus:outline-none focus:ring-2 focus:ring-purple-300">
+                                Add to <span class="inline-flex items-center ml-1"><svg
+                                        xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 512 512">
+                                        <circle cx="176" cy="416" r="32" fill="currentColor" />
+                                        <circle cx="400" cy="416" r="32" fill="currentColor" />
+                                        <path fill="currentColor"
+                                            d="M456.8 120.78a23.92 23.92 0 0 0-18.56-8.78H133.89l-6.13-34.78A16 16 0 0 0 112 64H48a16 16 0 0 0 0 32h50.58l45.66 258.78A16 16 0 0 0 160 368h256a16 16 0 0 0 0-32H173.42l-5.64-32h241.66A24.07 24.07 0 0 0 433 284.71l28.8-144a24 24 0 0 0-5-19.93" />
+                                    </svg></span>
                             </button>
 
                             <button type="button"
@@ -142,4 +148,3 @@
 </section>
 
 @vite(['resources/js/product-list.js'])
-
