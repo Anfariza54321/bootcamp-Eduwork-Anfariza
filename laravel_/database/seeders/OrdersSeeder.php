@@ -58,19 +58,19 @@ class OrdersSeeder extends Seeder
                     'pengguna_id' => 2,
                     'products_id' => 1,
                     'quantity' => 5,
-                    'total' => 3000000
+                    'total' => 5000000
                 ],
                 [
                     'pengguna_id' => 3,
                     'products_id' => 2,
                     'quantity' => 3,
-                    'total' => 1500000
+                    'total' => 4500000
                 ],
                 [
                     'pengguna_id' => 1,
                     'products_id' => 3,
                     'quantity' => 2,
-                    'total' => 1200000
+                    'total' => 2400000
                 ],
             ]
         );
