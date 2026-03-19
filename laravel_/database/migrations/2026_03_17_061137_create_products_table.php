@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('stok');
             $table->string('gambar');
-            $table->foreignId('category_id')->constrained('pengguna')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('category')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produk');
+        Schema::dropIfExists('products');
     }
 };

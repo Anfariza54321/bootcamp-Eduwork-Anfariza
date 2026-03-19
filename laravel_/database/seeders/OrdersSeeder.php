@@ -55,19 +55,19 @@ class OrdersSeeder extends Seeder
         DB::table('orders')->insert(
             [
                 [
-                    'pengguna_id' => 2,
+                    'users_id' => 2,
                     'products_id' => 1,
                     'quantity' => 5,
                     'total' => 5000000
                 ],
                 [
-                    'pengguna_id' => 3,
+                    'users_id' => 3,
                     'products_id' => 2,
                     'quantity' => 3,
                     'total' => 4500000
                 ],
                 [
-                    'pengguna_id' => 1,
+                    'users_id' => 1,
                     'products_id' => 3,
                     'quantity' => 2,
                     'total' => 2400000
