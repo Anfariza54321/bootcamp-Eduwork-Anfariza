@@ -27,9 +27,9 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         $cart[$id] = [
-            "name" => $request->name,
+            "name" => $request->nama,
             "quantity" => isset($cart[$id]) ? $cart[$id]['quantity'] + 1 : 1,
-            "price" => $request->price
+            "price" => $request->harga
             // "image" => $request->image
         ];
 

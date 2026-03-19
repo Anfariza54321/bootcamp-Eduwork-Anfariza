@@ -27,9 +27,33 @@
                             </li>
                             <li
                                 class="flex items-center gap-3 py-2 px-2 hover:bg-purple-800/50 rounded-lg cursor-pointer text-sm text-purple-100">
-                                <input type="checkbox" name="category[]" value="Adidas"
+                                <input type="checkbox" name="category[]" value="Nike"
                                     class="w-4 h-4 rounded border-purple-400 text-purple-300 focus:ring-purple-500">
                                 <span>Nike</span>
+                            </li>
+                            <li
+                                class="flex items-center gap-3 py-2 px-2 hover:bg-purple-800/50 rounded-lg cursor-pointer text-sm text-purple-100">
+                                <input type="checkbox" name="category[]" value="Puma"
+                                    class="w-4 h-4 rounded border-purple-400 text-purple-300 focus:ring-purple-500">
+                                <span>Puma</span>
+                            </li>
+                            <li
+                                class="flex items-center gap-3 py-2 px-2 hover:bg-purple-800/50 rounded-lg cursor-pointer text-sm text-purple-100">
+                                <input type="checkbox" name="category[]" value="Reebok"
+                                    class="w-4 h-4 rounded border-purple-400 text-purple-300 focus:ring-purple-500">
+                                <span>Reebok</span>
+                            </li>
+                            <li
+                                class="flex items-center gap-3 py-2 px-2 hover:bg-purple-800/50 rounded-lg cursor-pointer text-sm text-purple-100">
+                                <input type="checkbox" name="category[]" value="Aerostreet"
+                                    class="w-4 h-4 rounded border-purple-400 text-purple-300 focus:ring-purple-500">
+                                <span>Aerostreet</span>
+                            </li>
+                            <li
+                                class="flex items-center gap-3 py-2 px-2 hover:bg-purple-800/50 rounded-lg cursor-pointer text-sm text-purple-100">
+                                <input type="checkbox" name="category[]" value="Vans"
+                                    class="w-4 h-4 rounded border-purple-400 text-purple-300 focus:ring-purple-500">
+                                <span>Vans</span>
                             </li>
                         </ul>
                     </div>
@@ -93,33 +117,41 @@
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 p-8">
 
         @foreach ($products as $item)
-            <a href="/product-detail/{{ $item['id'] }}"
+            @php
+                $gambar = trim($item->gambar ?? '');
+                $gambarUrl = $gambar
+                    ? asset('images/' . $gambar)
+                    : asset('images/shoes_flat_illustration-removebg-preview.jpg');
+            @endphp
+            <a href="/product-detail/{{ $item->id }}"
                 class="group relative z-0 block overflow-hidden rounded-xl p-2 transition duration-300 hover:z-10">
                 <div
                     class="relative overflow-hidden rounded-lg border-2 border-purple-400/90 bg-slate-900/90 transition duration-300 hover:border-purple-300">
-                    <img src="https://images.unsplash.com/photo-1628202926206-c63a34b1618f?auto=format&amp;fit=crop&amp;q=80&amp;w=1160"
-                        alt=""
+                    <img src="{{ $gambarUrl }}" alt="{{ $item->nama }}"
+                        onerror="this.onerror=null;this.src='{{ asset('images/shoes_flat_illustration.jpg') }}'"
                         class="h-64 w-full object-cover transition duration-500 transform group-hover:scale-105 sm:h-72">
 
                     <div class="relative bg-slate-950/80 p-6 z-10">
                         <p class="text-cyan-600 font-semibold">
-                            ${{ $item['hargaDiskon'] }}
-                            <span class="text-gray-400 line-through">${{ $item['hargaAsli'] }}</span>
+                            Rp{{ number_format($item->harga ?? 0, 0, ',', '.') }}
+                            {{-- <span class="text-gray-400 line-through">Rp{{ number_format($item->hargaAsli ?? 0, 0, ',', '.') }}</span> --}}
                         </p>
 
-                        <h3 class="mt-1.5 text-lg font-medium text-cyan-600">{{ $item['namaProduk'] }}
+                        <h3 class="mt-1.5 text-lg font-medium text-cyan-600">{{ $item->nama }}
                         </h3>
+
+                        <p class="mt-1.5 text-md font-medium text-gray-500">{{ $item->deskripsi }}</p>
 
                         <p class="mt-1.5 line-clamp-3 text-gray-700">
 
                         </p>
 
-                        <form action="{{ route('carts.add', $item['id']) }}" method="POST"
+                        <form action="{{ route('carts.add', $item->id) }}" method="POST"
                             class="mt-4 flex gap-4 items-center justify-between">
                             @csrf
-                            <input type="hidden" name="name" value="{{ $item['namaProduk'] }}">
-                            <input type="hidden" name="price" value="{{ $item['hargaDiskon'] }}">
-                            {{-- <input type="hidden" name="image" value="{{ $item['gambar'] }}"> --}}
+                            <input type="hidden" name="nama" value="{{ $item->nama }}">
+                            <input type="hidden" name="harga" value="{{ $item->harga }}">
+                            <input type="hidden" name="gambar" value="{{ $item->gambar }}">
 
                             <button type="submit"
                                 class="flex items-center rounded-md bg-purple-100/30 px-3 py-2 text-xs font-semibold text-purple-300 hover:bg-purple-500/30 hover:text-purple-100 transition focus:outline-none focus:ring-2 focus:ring-purple-300">
@@ -141,6 +173,10 @@
                 </div>
             </a>
         @endforeach
+
+        <div class="mt-8 w-full">
+            {{ $products->links() }}
+        </div>
 
     </div>
     </div>

@@ -17,9 +17,10 @@ class ProductsSeeder extends Seeder
                 'id' => 1,
                 'nama' => 'Adidas Samba OG',
                 'deskripsi' => 'Nikmati kenyamanan maksimal dengan Adidas. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
-                'harga'=>1000000,
+                'harga' => 1000000,
                 'stok' => 8,
-                'gambar' => 'Adidas.jpg'
+                'gambar' => 'adidasSOG.jpg',
+                'category_id' => 2
             ],
             [
                 'id' => 2,
@@ -27,7 +28,8 @@ class ProductsSeeder extends Seeder
                 'deskripsi' => 'Nikmati kenyamanan maksimal dengan Puma. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
                 'harga' => 1500000,
                 'stok' => 5,
-                'gambar' => 'Puma.jpg'
+                'gambar' => 'pumaDN2.jpg',
+                'category_id' => 3
             ],
             [
                 'id' => 3,
@@ -35,7 +37,53 @@ class ProductsSeeder extends Seeder
                 'deskripsi' => 'Nikmati kenyamanan maksimal dengan Nike. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
                 'harga' => 1200000,
                 'stok' => 3,
-                'gambar' => 'Nike.jpg'
+                'gambar' => 'nikeJ1L.jpg',
+                'category_id' => 1
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Adidas Samba OG 2',
+                'deskripsi' => 'Nikmati kenyamanan maksimal dengan Adidas. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
+                'harga' => 1000000,
+                'stok' => 8,
+                'gambar' => 'adidasSOG.jpg',
+                'category_id' => 2
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Puma Deviate Nitro 2',
+                'deskripsi' => 'Nikmati kenyamanan maksimal dengan Puma. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
+                'harga' => 1500000,
+                'stok' => 5,
+                'gambar' => 'pumaDN2.jpg',
+                'category_id' => 3
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Nike Air Jordan 1 Low',
+                'deskripsi' => 'Nikmati kenyamanan maksimal dengan Nike. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
+                'harga' => 1200000,
+                'stok' => 3,
+                'gambar' => 'nikeJ1L.jpg',
+                'category_id' => 1
+            ],
+            [
+                'id' => 7,
+                'nama' => 'Puma Deviate Nitro 2',
+                'deskripsi' => 'Nikmati kenyamanan maksimal dengan Puma. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
+                'harga' => 1500000,
+                'stok' => 5,
+                'gambar' => 'pumaDN2.jpg',
+                'category_id' => 3
+            ],
+            [
+                'id' => 8,
+                'nama' => 'Nike Air Jordan 1 Low',
+                'deskripsi' => 'Nikmati kenyamanan maksimal dengan Nike. Dibuat dengan material berkualitas tinggi yang memberikan durabilitas serta gaya modern yang cocok untuk aktivitas harian Anda.',
+                'harga' => 1200000,
+                'stok' => 3,
+                'gambar' => 'nikeJ1L.jpg',
+                'category_id' => 1
             ]
         ]);
     }

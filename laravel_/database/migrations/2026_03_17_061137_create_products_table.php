@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('stok');
             $table->string('gambar');
+            $table->foreignId('category_id')->constrained('pengguna')->onDelete('cascade');
             $table->timestamps();
         });
     }
