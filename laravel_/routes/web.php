@@ -19,11 +19,13 @@ Route::get(
     [ProductController::class, 'show']
 );
 
+Route::get('/categoryAdmin', function () {
+    return view('dashboard.categoryAdmin');
+})->name('categoryAdmin');
 
-
-// Route::get('/carts', function () {
-//     return view('carts');
-// });
+Route::get('/productsAdmin', function () {
+    return view('dashboard.productsAdmin');
+})->name('productsAdmin');
 
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
