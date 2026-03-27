@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('slug')->unique();
             $table->text('deskripsi');
             $table->integer('harga');
             $table->integer('stok');
             $table->string('gambar');
-            $table->foreignId('category_id')->constrained('category')->onDelete('cascade');
+            $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

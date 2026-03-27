@@ -18,19 +18,19 @@ class UsersSeeder extends Seeder
                 [
                     'id' => 1,
                     'name' => 'Toni Subagyo',
-                    'email' => 'Tonisubagyo@gmail.com',
+                    'email' => 'tonisubagyo@gmail.com',
                     'password' => Hash::make('password')
                 ],
                 [
                     'id' => 2,
                     'name' => 'Toni Raharjo',
-                    'email' => 'Tonoraharjo@gmail.com',
+                    'email' => 'tonoraharjo@gmail.com',
                     'password' => Hash::make('password')
                 ],
                 [
                     'id' => 3,
                     'name' => 'Toni Setiawan',
-                    'email' => 'Tonisetiawan@gmail.com',
+                    'email' => 'tonisetiawan@gmail.com',
                     'password' => Hash::make('password')
                 ]
             ]
