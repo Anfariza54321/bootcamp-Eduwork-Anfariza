@@ -9,10 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <button
+                    <button x-data="{}" type="button" @click.prevent = "$dispatch('open-modal', 'add-category')"
                         class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-8">
                         Add Category
                     </button>
+                    @include('admin.categoryAdmin.createCategory')
                     <div
                         class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
                         <table class="w-full text-sm text-left rtl:text-right text-body">
@@ -80,12 +81,26 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4" x-data="{}">
                                             <div class="flex gap-2">
-                                                <a href="#"
-                                                    class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Remove</a>
-                                                <a href="#"
-                                                    class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded">Edit</a>
+                                                <button type="button"
+                                                    @click.prevent="$dispatch('open-modal', 'confirm-delete-{{ $category->id }}')"
+                                                    class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">
+                                                    Remove
+                                                </button>
+                                                
+                                                @include('admin.categoryAdmin.editCategory', [
+                                                    'category' => $category,
+                                                ])
+                                                @include('admin.categoryAdmin.deleteCategory', [
+                                                    'category' => $category,
+                                                ])
+                                                
+                                                <button type="button"
+                                                    @click.prevent="$dispatch('open-modal', 'edit-category-{{ $category->id }}')"
+                                                    class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded">
+                                                    Edit
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -102,3 +117,4 @@
 </div>
 
 @vite(['resources/js/categoryAdmin.js'])
+@vite(['resources/js/app.js'])

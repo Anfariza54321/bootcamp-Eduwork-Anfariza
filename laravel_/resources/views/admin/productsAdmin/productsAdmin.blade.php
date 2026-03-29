@@ -9,10 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <button
-                        class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-8">
+                    <a href="{{ route('products.create') }}"
+                        class="inline-block bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-8">
                         Add Products
-                    </button>
+                    </a>
                     <div
                         class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
                         <table class="w-full text-sm text-left rtl:text-right text-body">
@@ -26,6 +26,9 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3 font-bold">
                                         Product
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 font-bold">
+                                        Merek
                                     </th>
                                     <th scope="col" class="px-6 py-3 font-bold">
                                         Deskripsi
@@ -55,6 +58,9 @@
                                         </td>
                                         <td class="px-6 py-4 font-semibold text-heading">
                                             {{ $product->nama }}
+                                        </td>
+                                        <td class="px-6 py-4 font-semibold text-heading">
+                                            {{ $product->category->nama ?? 'Tanpa Kategori' }}
                                         </td>
                                         <td class="px-6 py-4 font-semibold text-heading max-w-xs">
                                             <p class="truncate">{{ $product->deskripsi }}</p>
@@ -93,11 +99,25 @@
                                         <td class="px-6 py-4 font-semibold text-heading">
                                             Rp{{ number_format($product->harga, 0, ',', '.') }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <a href="#"
-                                                class=" bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Remove</a>
-                                            <a href="#"
-                                                class=" bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded">Edit</a>
+                                        <td class="px-6 py-4" x-data="{}">
+                                            <div class="flex gap-2">
+                                                {{-- Tombol Remove (Biasanya tetap pakai konfirmasi halaman/modal) --}}
+                                            
+                                                <button type="button"
+                                                    @click.prevent="$dispatch('open-modal', 'confirm-delete-{{ $product->id }}')"
+                                                    class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">
+                                                    Remove
+                                                </button>
+                                                @include('admin.productsAdmin.deleteProducts', [
+                                                    'product' => $product,
+                                                ])
+
+                                                {{-- Tombol Edit mengarah ke halaman edit --}}
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 rounded">
+                                                    Edit
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
