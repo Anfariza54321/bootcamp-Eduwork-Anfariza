@@ -12,7 +12,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = [
+            ['id' => 1, 'name' => 'Sepatu Nike', 'price' => 1000000, 'category' => 'Olahraga'],
+            ['id' => 2, 'name' => 'Sepatu Adidas', 'price' => 900000, 'category' => 'Olahraga'],
+            ['id' => 3, 'name' => 'Sepatu Vans', 'price' => 800000, 'category' => 'Casual'],
+        ];
+        return view ('frontend.products', compact('products'));
     }
 
     /**
