@@ -70,16 +70,16 @@
      <div class=" mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
          @foreach ($products as $product)
              <div class="cursor-pointer product-item group flex flex-col h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 dark:border-slate-700/50 dark:bg-slate-800/80 backdrop-blur-sm"
-                 onclick="openProductModal('{{ $product['id'] }}', '{{ addslashes($product['nama']) }}', '{{ number_format($product['harga'], 0, ',', '.') }}', '{{ asset('storage/' . $product['gambar']) }}')">
+                 onclick="openProductModal('{{ $product->id }}', '{{ addslashes($product->nama) }}', '{{ number_format($product->harga, 0, ',', '.') }}', '{{ asset('storage/' . $product->gambar) }}')">
 
                  <div class="relative h-52 w-full overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-900/50">
                      <a href="javascript:void(0)" class="flex h-full items-center justify-center">
                          <img class="max-h-full max-w-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
-                             src="{{ asset('images/' . $product['gambar']) }}" alt="{{ $product['nama'] }}" />
+                             src="{{ asset('images/' . $product->gambar) }}" alt="{{ $product->nama }}" />
                      </a>
                      <span
                          class="product-item absolute top-3 left-3 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 px-3 py-1 text-[10px] font-bold text-white shadow-lg uppercase tracking-wider">
-                         {{ $product['merek'] }}
+                         {{ $product->merek->nama }}
                      </span>
                  </div>
 
@@ -93,16 +93,16 @@
                              <span class="text-xs font-bold text-slate-700 dark:text-slate-300">5.0</span>
                          </div>
                          <span class="text-[11px] font-medium text-slate-400 dark:text-slate-500 italic">Stok:
-                             {{ $product['stok'] }} unit</span>
+                             {{ $product->stok }} unit</span>
                      </div>
 
                      <a href="javascript:void(0)"
                          class="mb-2 block text-lg font-bold leading-tight text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 transition-colors line-clamp-1">
-                         {{ $product['nama'] }}
+                         {{ $product->nama }}
                      </a>
 
                      <p class="mb-5 font-normal text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
-                         {{ $product['deskripsi'] }}
+                         {{ $product->deskripsi }}
                      </p>
 
                      <div class="mt-auto border-t border-slate-100 pt-4 dark:border-slate-700/50">
@@ -112,13 +112,13 @@
                                  Terbaik</span>
                              <p class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
                                  <span
-                                     class="product-item mr-1 text-xl font-extrabold text-blue-600">Rp</span>{{ number_format($product['harga'], 0, ',', '.') }}
+                                     class="product-item mr-1 text-xl font-extrabold text-blue-600">Rp</span>{{ number_format($product->harga, 0, ',', '.') }}
                              </p>
                          </div>
 
                          <div class="flex gap-2">
                              <button type="button" onclick="stopPropagation();"
-                                 onclick="openProductModal('{{ $product['id'] }}', '{{ addslashes($product['nama']) }}', '{{ number_format($product['harga'], 0, ',', '.') }}', '{{ asset('images/' . $product['gambar']) }}')"
+                                 onclick="openProductModal('{{ $product->id }}', '{{ addslashes($product->nama) }}', '{{ number_format($product->harga, 0, ',', '.') }}', '{{ asset('images/' . $product->gambar) }}')"
                                  class="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-slate-200 text-slate-600 transition-all hover:bg-slate-50 hover:border-blue-500 hover:text-blue-600 dark:border-slate-600 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-blue-400">
                                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
                                      viewBox="0 0 24 24">
@@ -137,11 +137,12 @@
              </div>
          @endforeach
      </div>
-     <div class="w-full text-center">
-         <button type="button"
-             class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Show
-             more</button>
+     <div class="mt-12 flex justify-center">
+         <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+             {{ $products->links() }}
+         </div>
      </div>
+     
  </div>
 
  {{-- product detail --}}
@@ -211,5 +212,6 @@
          </div>
      </div>
  </div>
- 
-@vite(['resources/js/product.js'])
+
+
+ @vite(['resources/js/product.js'])
