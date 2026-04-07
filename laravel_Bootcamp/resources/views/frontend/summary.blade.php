@@ -1,4 +1,4 @@
 <x-layout>
     @include('partials.navbar')
-    @include('components.checkout-section')
+    @include('components.order-summary')
 </x-layout>

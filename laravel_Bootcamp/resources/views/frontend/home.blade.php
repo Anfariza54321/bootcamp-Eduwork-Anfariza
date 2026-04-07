@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page</title>
-</head>
-<body>
-    <h1>Ini adalah halamana Home</h1>
-</body>
-</html>
+<x-layout>
+        <x-slot:title>Home</x-slot:title>
+        @include('partials.navbar')
+        @include('components.home-page')
+        @include('components.features-section')
+        @include('components.logos-section')
+        @include('partials.footer')
+</x-layout>

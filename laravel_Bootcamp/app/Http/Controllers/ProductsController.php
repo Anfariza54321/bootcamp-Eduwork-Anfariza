@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\products;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -10,13 +10,135 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request)
     {
-        $products = [
-            ['id' => 1, 'name' => 'Sepatu Nike', 'price' => 1000000, 'category' => 'Olahraga'],
-            ['id' => 2, 'name' => 'Sepatu Adidas', 'price' => 900000, 'category' => 'Olahraga'],
-            ['id' => 3, 'name' => 'Sepatu Vans', 'price' => 800000, 'category' => 'Casual'],
-        ];
+        $search = $request->input('q');
+        $selectedMerek = $request->input('brands');
+        $sort = $request->input('sort');
+
+        $products = collect ([
+            [
+                'id' => 1,
+                'nama' => 'Nike Air Jordan 1 Retro High',
+                'slug' => 'nike-air-jordan-1-retro-high',
+                'deskripsi' => 'Ikon klasik yang tidak pernah mati. Menampilkan kombinasi warna legendaris dengan material kulit premium.',
+                'harga' => 2500000,
+                'stok' => 15,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Nike'
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Adidas Ultraboost Light',
+                'slug' => 'adidas-ultraboost-light',
+                'deskripsi' => 'Sepatu lari paling ringan yang pernah ada dengan teknologi Boost untuk energi yang tak terbatas.',
+                'harga' => 3300000,
+                'stok' => 20,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Adidas'
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Puma Suede Classic XXI',
+                'slug' => 'puma-suede-classic-xxi',
+                'deskripsi' => 'Desain klasik Puma yang mendefinisikan gaya jalanan sejak tahun 1968. Material suede berkualitas tinggi.',
+                'harga' => 1200000,
+                'stok' => 25,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Puma'
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Aerostreet Hoops Low White',
+                'slug' => 'aerostreet-hoops-low-white',
+                'deskripsi' => 'Sepatu lokal berkualitas tinggi dengan teknologi Shoes Injection Mould yang membuatnya tidak akan jebol.',
+                'harga' => 169000,
+                'stok' => 100,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Aerostreet'
+            ],
+            [
+                'id' => 5,
+                'nama' => 'New Balance 550 White Grey',
+                'slug' => 'new-balance-550-white-grey',
+                'deskripsi' => 'Siluet basket tahun 80-an yang kembali tren. Sangat nyaman untuk penggunaan kasual sehari-hari.',
+                'harga' => 2100000,
+                'stok' => 12,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'New Balance'
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Converse Chuck Taylor All Star 70s Hi',
+                'slug' => 'converse-chuck-70s-hi',
+                'deskripsi' => 'Sepatu kanvas premium dengan sol lebih tebal dan kenyamanan ekstra untuk gaya vintage yang otentik.',
+                'harga' => 999000,
+                'stok' => 40,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Converse'
+            ],
+            [
+                'id' => 7,
+                'nama' => 'Reebok Club C 85 Vintage',
+                'slug' => 'reebok-club-c-85-vintage',
+                'deskripsi' => 'Sepatu tenis klasik dengan tampilan minimalis yang elegan. Cocok dipadukan dengan celana denim atau chino.',
+                'harga' => 1300000,
+                'stok' => 18,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Reebok'
+            ],
+            [
+                'id' => 8,
+                'nama' => 'Nike Air Force 1 Low White',
+                'slug' => 'nike-air-force-1-low-white',
+                'deskripsi' => 'Sepatu putih bersih paling ikonik di dunia. Wajib dimiliki bagi pecinta sneakers.',
+                'harga' => 1600000,
+                'stok' => 30,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Nike'
+            ],
+            [
+                'id' => 9,
+                'nama' => 'Vans Old Skool Black White',
+                'slug' => 'vans-old-skool-black-white',
+                'deskripsi' => 'Gaya skate sejati dengan garis samping yang ikonik. Terbuat dari kanvas dan suede yang tahan lama.',
+                'harga' => 1100000,
+                'stok' => 50,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Vans'
+            ],
+            [
+                'id' => 10,
+                'nama' => 'Compass Gazelle Low Black White',
+                'slug' => 'compass-gazelle-low-bw',
+                'deskripsi' => 'Karya anak bangsa dengan siluet vintage yang selalu ludes di pasaran. Menggunakan material kanvas 10 oz.',
+                'harga' => 408000,
+                'stok' => 5,
+                'gambar' => 'image-placeholder.png',
+                'merek' => 'Compass'
+            ],
+        ]);
+
+        if ($search) {
+            $products = $products->filter(function ($item) use ($search) {
+                
+                return false !== stripos($item['nama'], $search) ||
+                    false !== stripos($item['merek'], $search);
+            });
+        }
+
+        if ($selectedMerek) {
+            $products = $products->filter(function ($item) use ($selectedMerek) {
+                return in_array($item['merek'], $selectedMerek);
+            });
+        }
+
+        if ($sort === 'asc') {
+            $products = $products->sortBy('harga')->values();
+        } elseif ($sort === 'desc') {
+            $products = $products->sortByDesc('harga')->values();
+        }
+
         return view ('frontend.products', compact('products'));
     }
 
@@ -32,38 +154,6 @@ class ProductsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(products $products)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(products $products)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, products $products)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(products $products)
     {
         //
     }
