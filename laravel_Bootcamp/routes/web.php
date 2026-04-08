@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\MerekAdminController;
+use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,10 @@ Route::post('/process-order', [CheckoutController::class, 'store'])->name('order
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/produkAdmin', [ProductAdminController::class, 'index'])->name('produkAdmin');
+
+Route::get('/merekAdmin', [MerekAdminController::class, 'index'])->name('merekAdmin');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
