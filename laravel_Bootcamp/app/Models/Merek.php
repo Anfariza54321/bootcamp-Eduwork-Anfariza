@@ -11,6 +11,6 @@ class Merek extends Model
 
     public function products()
     {
-        return $this->hasMany(Products::class, 'merek_id', 'id');
+        return $this->hasMany(Product::class, 'merek_id', 'id');
     }
 }

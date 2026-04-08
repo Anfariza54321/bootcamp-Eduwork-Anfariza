@@ -2,26 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merek;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductAdminController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = Product::with('merek');
+        $produks = Product::with('merek')->oldest()->get();
+        $mereks = Merek::all(); 
 
-        // Cek apakah ada input search
-        if ($request->has('search') && $request->search != '') {
-            $search = $request->search;
-            $query->where('nama', 'like', "%{$search}%")
-                ->orWhereHas('merek', function ($q) use ($search) {
-                    $q->where('nama', 'like', "%{$search}%");
-                });
+        return view('frontend.produkAdmin', compact('produks', 'mereks'));
+    }
+
+    public function create()
+    {
+        $mereks = Merek::all();
+        return view('frontend.produkAdminCreate', compact('mereks'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+            'merek_id' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $path = null;
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('products', 'public');
         }
 
-        $produks = $query->latest()->paginate(10)->withQueryString();
+        Product::create([
+            'nama' => $request->nama,
+            'slug' => Str::slug($request->nama),
+            'deskripsi' => '-',
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'merek_id' => $request->merek_id,
+            'gambar' => $path,
+        ]);
 
-        return view('frontend.produkAdmin', compact('produks'));
+        return redirect()->route('produkAdmin')->with('success', 'Produk berhasil ditambah!');
+    }
+
+    public function edit($id)
+    {
+        $produk = Product::findOrFail($id);
+        $mereks = Merek::all();
+        return view('frontend.produkAdminEdit', compact('produk', 'mereks'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $produk = Product::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+            $produk->gambar = $request->file('gambar')->store('products', 'public');
+        }
+
+        $produk->update($request->except('gambar') + ['gambar' => $produk->gambar]);
+
+        return redirect()->route('produkAdmin')->with('success', 'Produk berhasil diupdate!');
     }
 }
