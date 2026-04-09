@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MerekAdminController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductsController;
@@ -49,9 +50,7 @@ Route::put('/merekAdmin/{id}', [MerekAdminController::class, 'update'])->name('m
 Route::delete('/merekAdmin/{id}', [MerekAdminController::class, 'destroy'])->name('merek.destroy');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
