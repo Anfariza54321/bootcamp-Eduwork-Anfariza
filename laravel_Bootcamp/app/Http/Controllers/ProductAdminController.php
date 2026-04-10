@@ -27,29 +27,40 @@ class ProductAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
-            'merek_id' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'nama' => 'required|string|max:255|unique:products,nama',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'merek_id' => 'required|exists:merek,id',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+        ], [
+            'nama.unique' => 'Nama produk ini sudah terdaftar, gunakan nama lain.',
+            'merek_id.exists' => 'Merek yang dipilih tidak valid.',
         ]);
 
-        $path = null;
-        if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('products', 'public');
+        try {
+            $path = null;
+            if ($request->hasFile('gambar')) {
+                
+                $file = $request->file('gambar');
+                $fileName = time() . '_' . Str::slug($request->nama) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('products', $fileName, 'public');
+            }
+
+            Product::create([
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'deskripsi' => $request->deskripsi ?? '-', 
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'merek_id' => $request->merek_id,
+                'gambar' => $path,
+            ]);
+
+            return redirect()->route('produkAdmin')->with('success', 'SYSTEM_UPDATE: Produk berhasil ditambah!');
+        } catch (\Exception $e) {
+           
+            return back()->withInput()->with('error', 'Gagal menambah produk: ' . $e->getMessage());
         }
-
-        Product::create([
-            'nama' => $request->nama,
-            'slug' => Str::slug($request->nama),
-            'deskripsi' => '-',
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'merek_id' => $request->merek_id,
-            'gambar' => $path,
-        ]);
-
-        return redirect()->route('produkAdmin')->with('success', 'Produk berhasil ditambah!');
     }
 
     public function edit($id)

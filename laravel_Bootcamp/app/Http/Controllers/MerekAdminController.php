@@ -27,16 +27,33 @@ class MerekAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|unique:merek,nama|max:255',
+            'nama' => [
+                'required',
+                'string',
+                'max:50',
+                'unique:merek,nama',
+                'min:2',
+                'regex:/^[a-zA-Z0-9\s-]+$/'
+            ],
+        ], [
+            'nama.required' => 'ERROR: Nama merek wajib diisi.',
+            'nama.unique' => 'CONFLICT: Nama merek sudah terdaftar di database.',
+            'nama.regex' => 'FORMAT_INVALID: Gunakan hanya karakter alphanumeric.',
+            'nama.max' => 'LIMIT_EXCEEDED: Nama merek terlalu panjang (Maks 50 karakter).',
         ]);
 
-        Merek::create([
-            'nama' => $request->nama,
-            'slug' => Str::slug($request->nama),
-            'jumlah' => 0,
-        ]);
+        try {
+            Merek::create([
+                'nama' => trim($request->nama), 
+                'slug' => Str::slug($request->nama),
+                'jumlah' => 0, 
+            ]);
 
-        return redirect()->route('merekAdmin')->with('success', 'Merek berhasil ditambahkan!');
+            return redirect()->route('merekAdmin')->with('success', 'DATABASE_UPDATED: Merek baru telah diregistrasi.');
+        } catch (\Exception $e) {
+            
+            return back()->withInput()->with('error', 'CRITICAL_ERROR: Gagal menyimpan data ke server.');
+        }
     }
 
     public function edit($id)
