@@ -17,22 +17,22 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert(
             [
                 [
-                    'id' => 1,
                     'name' => 'Toni Subagyo',
                     'email' => 'tonisubagyo@gmail.com',
-                    'password' => Hash::make('password')
+                    'password' => Hash::make('password'),
+                    'role' => 'admin'
                 ],
                 [
-                    'id' => 2,
                     'name' => 'Toni Raharjo',
                     'email' => 'tonoraharjo@gmail.com',
-                    'password' => Hash::make('password')
+                    'password' => Hash::make('password'),
+                    'role' => 'user'
                 ],
                 [
-                    'id' => 3,
                     'name' => 'Toni Setiawan',
                     'email' => 'tonisetiawan@gmail.com',
-                    'password' => Hash::make('password')
+                    'password' => Hash::make('password'),
+                    'role' => 'user'
                 ]
             ]
         );

@@ -1,195 +1,145 @@
-<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+<section class="relative bg-transparent bg-white dark:bg-black py-8 antialiased md:py-12 transition-colors duration-500">
+    <div class="mx-auto max-w-7xl px-4 2xl:px-0 relative z-10">
+        <ol class="items-center flex w-full max-w-2xl text-center mb-8">
+            @php
+                $steps = [
+                    ['name' => 'Cart', 'route' => 'cart.index', 'active_check' => ['cart.index', 'checkout.index', 'order.summary']],
+                    ['name' => 'Checkout', 'route' => 'checkout.index', 'active_check' => ['checkout.index', 'order.summary']],
+                    ['name' => 'Summary', 'route' => 'order.summary', 'active_check' => ['order.summary']],
+                ];
+            @endphp
 
-    <div class="mx-auto max-w-7xl px-4 2xl:px-0">
-        <ol class="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
-            <li
-                class="flex items-center md:w-full 
-        {{ Route::is('cart.index', 'checkout.index', 'order.summary') ? 'text-blue-600' : 'text-gray-500' }} 
-        {{ Route::is('checkout.index', 'order.summary') ? 'after:border-blue-600' : 'after:border-gray-200' }}
-        after:border after:mx-6 after:hidden after:h-1 after:w-full after:border-b sm:after:inline-block xl:after:mx-10">
-                <a href="{{ route('cart.index') }}" class="flex items-center">
-                    <span class="flex items-center after:mx-2 after:content-['/'] sm:after:hidden">
-                        <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        Cart
-                    </span>
-                </a>
-            </li>
-
-            <li
-                class="flex items-center md:w-full 
-        {{ Route::is('checkout.index', 'order.summary') ? 'text-blue-600' : 'text-gray-500' }} 
-        {{ Route::is('order.summary') ? 'after:border-blue-600' : 'after:border-gray-200' }}
-        after:border after:mx-6 after:hidden after:h-1 after:w-full after:border-b sm:after:inline-block xl:after:mx-10">
-                <a href="{{ route('checkout.index') }}" class="flex items-center">
-                    <span class="flex items-center after:mx-2 after:content-['/'] sm:after:hidden">
-                        <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        Checkout
-                    </span>
-                </a>
-            </li>
-
-            <li class="flex shrink-0 items-center {{ Route::is('order.summary') ? 'text-blue-600' : 'text-gray-500' }}">
-                <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-                Order summary
-            </li>
+            @foreach ($steps as $index => $step)
+                <li class="flex items-center md:w-full font-mono text-[10px] tracking-[0.2em] uppercase font-black
+                    {{ Route::is(...$step['active_check']) ? 'text-cyan-500 dark:text-cyan-400' : 'text-gray-400 dark:text-gray-600' }}
+                    {{ !$loop->last ? "after:content-[''] after:mx-4 after:hidden after:h-[1px] after:w-full after:border-b-2 after:border-dashed sm:after:inline-block " . (Route::is(...$steps[$index+1]['active_check']) ? 'after:border-cyan-500' : 'after:border-gray-200 dark:after:border-gray-800') : '' }}">
+                    <a href="{{ route($step['route']) }}" class="flex items-center gap-2 group">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 {{ Route::is(...$step['active_check']) ? 'border-cyan-500 bg-cyan-500 text-white dark:text-black shadow-[0_0_10px_rgba(6,182,212,0.5)]' : 'border-gray-300 dark:border-gray-800' }} transition-all">
+                            {{ $index + 1 }}
+                        </span>
+                        <span class="hidden sm:inline">{{ $step['name'] }}_</span>
+                    </a>
+                </li>
+            @endforeach
         </ol>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Shopping Cart</h2>
+
+        <div class="border-l-4 border-purple-600 pl-4 mb-8">
+            <span class="text-[9px] font-mono text-purple-600 dark:text-purple-400 font-bold tracking-[0.4em] uppercase">//_User_Assets</span>
+            <h2 class="text-3xl font-black text-gray-900 dark:text-white uppercase italic tracking-tighter">Shopping_Cart</h2>
+        </div>
 
         <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+            <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl space-y-6">
+                @if (session('cart') && count(session('cart')) > 0)
+                    @foreach (session('cart') as $id => $item)
+                        <div class="relative group bg-white dark:bg-black border-2 border-gray-100 dark:border-white/5 p-4 md:p-6 transition-all hover:border-purple-500 dark:hover:border-cyan-500 overflow-hidden">
+                            <div class="absolute -right-4 -top-4 text-4xl font-black text-gray-50 dark:text-white/5 italic select-none uppercase tracking-tighter">Item</div>
+                            
+                            <div class="relative z-10 space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                                <div class="shrink-0 md:order-1 relative">
+                                    <div class="absolute -inset-1 bg-gradient-to-tr from-cyan-500 to-purple-600 opacity-20 group-hover:opacity-100 transition duration-500 blur-sm"></div>
+                                    <img class="relative h-24 w-24 object-cover border-2 border-white dark:border-black"
+                                        src="{{ asset('images/' . ($item['gambar'] ?? 'default.png')) }}"
+                                        alt="{{ $item['nama'] ?? 'produk' }}" />
+                                </div>
 
-            <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-                <div class="space-y-6">
-                    @if (session('cart') && count(session('cart')) > 0)
-                        
-                        @foreach (session('cart') as $id => $item)
-                            <div
-                                class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6 transition-all hover:ring-1 hover:ring-blue-500">
-                                
-                                <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-
-                                    
-                                    <a href="#" class="shrink-0 md:order-1">
-                                        <img class="h-24 w-24 rounded-lg object-cover"
-                                            src="{{ asset('images/' . ($item['gambar'] ?? 'default.png')) }}"
-                                            alt="{{ $item['nama'] ?? 'produk' }}" />
+                                <div class="w-full min-w-0 flex-1 space-y-2 md:order-2 md:max-w-md">
+                                    <span class="text-[8px] font-mono text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-widest">//_ID:{{ substr($id, 0, 8) }}</span>
+                                    <a href="#" class="block text-xl font-black text-gray-900 dark:text-white uppercase italic hover:text-purple-600 dark:hover:text-cyan-400 transition-colors">
+                                        {{ $item['nama'] }}
                                     </a>
-
                                     
-                                    <div class="w-full min-w-0 flex-1 space-y-2 md:order-2 md:max-w-md">
-                                        <a href="#"
-                                            class="text-lg font-bold text-gray-900 hover:text-blue-600 dark:text-white">
-                                            {{ $item['nama'] }}
-                                        </a>
-                                        <div class="flex items-center gap-4">
-                                            <form action="{{ route('cart.remove', $id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE') 
+                                    <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="group flex items-center gap-2 text-[10px] font-black uppercase tracking-tighter text-red-500 hover:text-red-700">
+                                            <span class="w-4 h-[1px] bg-red-500 group-hover:w-6 transition-all"></span>
+                                            Remove_Access_
+                                        </button>
+                                    </form>
+                                </div>
 
-                                                <button type="submit"
-                                                    class="inline-flex items-center text-sm font-medium text-red-500 hover:text-red-700 hover:underline">
-                                                    <svg class="me-1.5 h-5 w-5" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                    Remove
-                                                </button>
-                                            </form>
-                                        </div>
+                                <div class="flex items-center justify-between md:order-3 md:justify-end gap-8">
+                                    <div class="flex items-center border-2 border-gray-900 dark:border-cyan-500/30 bg-gray-50 dark:bg-gray-950">
+                                        <button type="button" class="w-8 h-8 flex items-center justify-center font-black text-gray-900 dark:text-cyan-400 hover:bg-black hover:text-white dark:hover:bg-cyan-500 dark:hover:text-black transition-all">-</button>
+                                        <input type="text" class="w-10 border-0 bg-transparent text-center text-xs font-black dark:text-white focus:ring-0" value="{{ $item['quantity'] }}" readonly />
+                                        <button type="button" class="w-8 h-8 flex items-center justify-center font-black text-gray-900 dark:text-cyan-400 hover:bg-black hover:text-white dark:hover:bg-cyan-500 dark:hover:text-black transition-all">+</button>
                                     </div>
-
                                     
-                                    <div class="flex items-center justify-between md:order-3 md:justify-end gap-6">
-                                        <div
-                                            class="flex items-center border border-gray-300 rounded-md dark:border-gray-600">
-                                            <button type="button"
-                                                class="px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-500">-</button>
-                                            <input type="text"
-                                                class="w-10 border-0 bg-transparent text-center text-sm font-semibold focus:ring-0 dark:text-white"
-                                                value="{{ $item['quantity'] }}" readonly />
-                                            <button type="button"
-                                                class="px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-500">+</button>
-                                        </div>
-                                        <div class="text-end w-32">
-                                            <p class="text-lg font-extrabold text-gray-900 dark:text-white">
-                                                Rp {{ number_format($item['harga'], 0, ',', '.') }}
-                                            </p>
-                                        </div>
+                                    <div class="text-end min-w-[120px]">
+                                        <span class="text-[8px] font-mono text-gray-400 uppercase">Sub_Total</span>
+                                        <p class="text-lg font-black text-gray-900 dark:text-white tracking-tighter">
+                                            <span class="text-xs text-purple-600">RP</span> {{ number_format($item['harga'], 0, ',', '.') }}
+                                        </p>
                                     </div>
-
                                 </div>
                             </div>
-                        @endforeach
-                    @else
-                        
-                        <div
-                            class="rounded-lg border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
-                            <p class="text-gray-500 dark:text-gray-400">Keranjang belanja Anda masih kosong.</p>
-                            <a href="/" class="mt-4 inline-block font-bold text-blue-600 hover:underline">Lanjut
-                                Belanja</a>
                         </div>
-                    @endif
-                </div>
+                    @endforeach
+                @else
+                    <div class="border-2 border-dashed border-gray-200 dark:border-white/10 p-12 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm">
+                        <div class="text-gray-400 dark:text-gray-600 font-mono text-xs mb-4 uppercase tracking-[0.3em]">//_No_Data_Found</div>
+                        <p class="text-sm font-bold text-gray-500 uppercase italic">Keranjang belanja Anda masih kosong.</p>
+                        <a href="/" class="mt-6 inline-block bg-black text-white dark:bg-white dark:text-black px-8 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-purple-600 dark:hover:bg-cyan-400 transition-all">Back_to_Market_</a>
+                    </div>
+                @endif
             </div>
 
             <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full lg:sticky lg:top-4">
-                <div
-                    class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                    <p class="text-xl font-semibold text-gray-900 dark:text-white">Order Summary</p>
+                <div class="relative bg-white dark:bg-black border-2 border-black dark:border-purple-500/30 p-6 shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:shadow-none">
+                    <h3 class="text-[10px] font-mono font-black text-purple-600 dark:text-purple-400 uppercase tracking-[0.4em] mb-6 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-purple-600 animate-pulse"></span>
+                        Terminal_Summary
+                    </h3>
 
                     @php
                         $originalPrice = 0;
                         if (session('cart')) {
-                            foreach (session('cart') as $item) {
-                                $originalPrice += $item['harga'] * $item['quantity'];
-                            }
+                            foreach (session('cart') as $item) { $originalPrice += $item['harga'] * $item['quantity']; }
                         }
-
-                        $taxRate = 0.11; // 11%
-                        $taxAmount = $originalPrice * $taxRate;
+                        $taxAmount = $originalPrice * 0.11;
                         $totalPrice = $originalPrice + $taxAmount;
                     @endphp
 
-                    <div class="space-y-4">
-                        <div class="space-y-2">
-                            <dl class="flex items-center justify-between gap-4 text-gray-500 dark:text-gray-400">
-                                <dt>Original Price</dt>
-                                
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">
-                                    Rp {{ number_format($originalPrice, 0, ',', '.') }}
-                                </dd>
-                            </dl>
-                            <dl class="flex items-center justify-between gap-4 text-gray-500 dark:text-gray-400">
-                                <dt>Store Pickup</dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">Rp 0</dd>
-                            </dl>
-                            <dl class="flex items-center justify-between gap-4 text-gray-500 dark:text-gray-400">
-                                <dt>Tax (11%)</dt>
-                                
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">
-                                    Rp {{ number_format($taxAmount, 0, ',', '.') }}
-                                </dd>
-                            </dl>
+                    <div class="space-y-4 font-bold uppercase tracking-tighter">
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <span>Base_Price</span>
+                            <span class="text-gray-900 dark:text-white">Rp {{ number_format($originalPrice, 0, ',', '.') }}</span>
                         </div>
-
-                        <dl
-                            class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-                            <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            
-                            <dd class="text-base font-bold text-gray-900 dark:text-white">
-                                Rp {{ number_format($totalPrice, 0, ',', '.') }}
-                            </dd>
-                        </dl>
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <span>Service_Tax (11%)</span>
+                            <span class="text-gray-900 dark:text-white">Rp {{ number_format($taxAmount, 0, ',', '.') }}</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 italic">
+                            <span>Logistics</span>
+                            <span class="text-green-500">FREE_</span>
+                        </div>
+                        
+                        <div class="pt-4 border-t-2 border-black dark:border-white/10 flex justify-between items-end">
+                            <span class="text-sm dark:text-cyan-400">Total_Credits</span>
+                            <span class="text-2xl font-black text-gray-900 dark:text-white tracking-tighter">
+                                <span class="text-xs">RP</span> {{ number_format($totalPrice, 0, ',', '.') }}
+                            </span>
+                        </div>
                     </div>
 
-                    <a href="{{ route('checkout.index') }}" title="Proceed to Checkout"
-                        class="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600">Proceed
-                        to Checkout</a>
+                    <div class="mt-8 space-y-4">
+                        <a href="{{ route('checkout.index') }}" 
+                            class="flex w-full items-center justify-center bg-black text-white dark:bg-cyan-500 dark:text-black px-5 py-4 text-xs font-black uppercase tracking-[0.2em] shadow-lg hover:bg-purple-600 dark:hover:bg-cyan-400 transition-all active:scale-95">
+                            Authorize_Payment_
+                        </a>
 
-                    <div class="flex items-center justify-center gap-2">
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
-                        <a href="{{ route('products.index') }}" title=""
-                            class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 underline hover:no-underline dark:text-blue-500">
-                            Continue Shopping
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
+                        <a href="{{ route('products.index') }}" class="flex items-center justify-center gap-2 text-[10px] font-black text-gray-500 dark:text-gray-400 hover:text-purple-600 transition-colors uppercase italic tracking-widest group">
+                            <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                            Back_to_Inventory
                         </a>
                     </div>
                 </div>
+                
+                <div class="border-2 border-gray-100 dark:border-white/5 p-4 flex justify-between items-center opacity-50">
+                    <span class="text-[8px] font-mono dark:text-gray-500">SECURE_ENCRYPTION: ENABLED</span>
+                    <span class="text-[8px] font-mono text-green-500 animate-pulse">LINK_STABLE</span>
+                </div>
             </div>
-
         </div>
     </div>
 </section>

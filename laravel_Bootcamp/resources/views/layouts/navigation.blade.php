@@ -3,26 +3,31 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="relative group">
+                    <a href="{{ route('admin.dashboard') }}" class="relative group">
                         <div class="absolute inset-0 bg-cyan-500/20 blur-lg group-hover:bg-cyan-500/40 transition-all rounded-full"></div>
                         <x-application-logo class="relative block h-10 w-auto fill-current text-cyan-400 transform scale-110 drop-shadow-[0_0_8px_#06b6d4]" />
                     </a>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" 
-                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('dashboard') ? 'text-cyan-400 shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')" 
+                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('dashboard') ? 'text-white shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     
                     <x-nav-link :href="route('produkAdmin')" :active="request()->routeIs('produkAdmin')"
-                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('produkAdmin') ? 'text-cyan-400 shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
+                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('produkAdmin') ? 'text-white shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
                         {{ __('Products') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('merekAdmin')" :active="request()->routeIs('merekAdmin')"
-                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('merekAdmin') ? 'text-cyan-400 shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
+                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('merekAdmin') ? 'text-white shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
                         {{ __('Brands') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')"
+                        class="text-xs uppercase tracking-[0.2em] font-black transition-all duration-300 {{ request()->routeIs('home') ? 'text-white shadow-[0_4px_0_-0px_#06b6d4]' : 'text-gray-500 hover:text-purple-400' }}">
+                        {{ __('Home') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -76,7 +81,7 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gray-900/95 backdrop-blur-lg border-b border-purple-500/30">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-cyan-400 border-l-4 border-cyan-400 bg-cyan-500/10 font-black uppercase text-xs tracking-widest">
+            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')" class="text-cyan-400 border-l-4 border-cyan-400 bg-cyan-500/10 font-black uppercase text-xs tracking-widest">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             </div>

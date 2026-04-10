@@ -1,67 +1,81 @@
-<footer class="bg-white text-sm font-semibold tracking-wide dark:bg-[#0a0a20] pt-16 pb-8 transition-colors duration-500">
-    <div class="container mx-auto px-6">
+<footer class="relative bg-white dark:bg-black pt-16 pb-8 transition-colors duration-500 overflow-hidden border-t-2 dark:border-cyan-500/20">
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none hidden dark:block"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
             
-            <div class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <div class="bg-white p-2 rounded-lg">
-                        <img src="{{ asset("images/logo_anfariza'SS.webp") }}" class="w-12 h-12" alt="" />
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 group">
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-50 transition duration-500"></div>
+                        <img src="{{ asset("images/logo_anfariza'SS.webp") }}" class="relative w-14 h-14 grayscale dark:grayscale-0" alt="Logo" />
                     </div>
-                    <span class="text-xl font-bold dark:text-white">Anfariza'SS</span>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black dark:text-white tracking-tighter italic uppercase">Anfariza'SS</span>
+                        <span class="text-[8px] font-mono text-cyan-600 dark:text-cyan-400 tracking-[0.3em] uppercase leading-none mt-1">//_Network_Official</span>
+                    </div>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
-                    Langkah pasti menuju masa depan yang penuh gaya. Temukan koleksi sepatu eksklusif kami, di mana setiap langkah adalah pernyataan. Bergabunglah dengan komunitas kami dan jadilah bagian dari perjalanan fashion yang tak terlupakan.
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs font-medium uppercase tracking-tight max-w-sm border-l-2 border-purple-500 pl-4">
+                    Langkah pasti menuju masa depan yang penuh gaya. Koleksi sepatu eksklusif kami adalah pernyataan jati diri dalam jaringan fashion global.
                 </p>
-                <div class="flex gap-4 pt-2">
-                    <a href="#" class="p-2 rounded-full bg-slate-100 dark:bg-white/5 text-slate-400 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-facebook-f"></i>
+                <div class="flex gap-3 pt-2">
+                    @foreach(['facebook', 'instagram', 'twitter', 'github'] as $platform)
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-none border border-gray-200 dark:border-cyan-500/30 text-gray-400 dark:text-cyan-400 hover:bg-cyan-500 hover:text-black dark:hover:shadow-[0_0_15px_#06b6d4] transition-all duration-300">
+                        <i class="fab fa-{{ $platform }}"></i>
                     </a>
-                    </div>
+                    @endforeach
+                </div>
             </div>
 
-            <div class="space-y-6">
-                <h4 class="text-sm font-semibold uppercase tracking-wider dark:text-white">Contact Us</h4>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-3">
-                        <div class="text-blue-600 mt-1"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="space-y-6 lg:pl-10">
+                <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-purple-600 dark:text-purple-400 italic mb-8 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-purple-600 rounded-full animate-pulse"></span>
+                    Contact_Channels
+                </h4>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 group">
+                        <div class="text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
-                            <p class="text-xs text-slate-400 uppercase tracking-tight">Alamat</p>
-                            <p class="text-sm dark:text-slate-300">Jakarta, Indonesia</p>
+                            <p class="text-[8px] font-mono text-gray-400 uppercase tracking-widest">Location_Sync</p>
+                            <p class="text-sm font-bold dark:text-gray-200 uppercase italic">Jakarta, Indonesia</p>
                         </div>
                     </div>
-                    <div class="flex items-start gap-3">
-                        <div class="text-blue-600 mt-1"><i class="fas fa-envelope"></i></div>
+                    <div class="flex items-center gap-4 group">
+                        <div class="text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform"><i class="fas fa-envelope"></i></div>
                         <div>
-                            <p class="text-xs text-slate-400 uppercase tracking-tight">Email</p>
-                            <p class="text-sm dark:text-slate-300">anfarizass@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="text-blue-600 mt-1"><i class="fas fa-phone-alt"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-400 uppercase tracking-tight">Telepon</p>
-                            <p class="text-sm dark:text-slate-300">+62 812-3456-7890</p>
+                            <p class="text-[8px] font-mono text-gray-400 uppercase tracking-widest">Data_Transfers</p>
+                            <p class="text-sm font-bold dark:text-gray-200">anfarizass@gmail.com</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <h4 class="text-sm font-semibold uppercase tracking-wider dark:text-white">Useful Links</h4>
-                <ul class="space-y-3">
-                    <li><a href="#" class="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors">About Us</a></li>
-                    <li><a href="#" class="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors">Contact Us</a></li>
-                    <li><a href="#" class="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors">Gallery</a></li>
-                    <li><a href="#" class="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors">FAQ</a></li>
+                <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-purple-600 dark:text-purple-400 italic flex items-center gap-2">
+                    <span class="w-2 h-2 bg-cyan-500 rounded-full"></span>
+                    System_Links
+                </h4>
+                <ul class="grid grid-cols-2 gap-4 lg:grid-cols-1">
+                    @foreach(['About Us', 'Products', 'Gallery', 'FAQ', 'Privacy Policy'] as $link)
+                    <li>
+                        <a href="#" class="text-xs font-black text-gray-500 dark:text-gray-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:pl-2 transition-all duration-300 uppercase tracking-widest flex items-center gap-2">
+                            <span class="text-purple-500 text-[10px]">>></span> {{ $link }}
+                        </a>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
 
         </div>
 
-        <div class="border-t border-slate-100 dark:border-white/5 pt-8 text-center">
-            <p class="text-xs text-slate-400">
-                &copy; {{ date('Y') }} Anfariza'SS. All rights reserved.
+        <div class="border-t border-gray-100 dark:border-cyan-500/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-[9px] font-mono text-gray-400 uppercase tracking-[0.2em]">
+                &copy; {{ date('Y') }} <span class="text-cyan-600 dark:text-cyan-400 font-black">Anfariza'SS</span>. All_Rights_Reserved.
             </p>
+            <div class="flex gap-6">
+                <p class="text-[8px] font-mono text-gray-500 uppercase tracking-tighter">Status: <span class="text-green-500">System_Online</span></p>
+                <p class="text-[8px] font-mono text-gray-500 uppercase tracking-tighter">Latency: <span class="text-cyan-500">24ms</span></p>
+            </div>
         </div>
     </div>
 </footer>

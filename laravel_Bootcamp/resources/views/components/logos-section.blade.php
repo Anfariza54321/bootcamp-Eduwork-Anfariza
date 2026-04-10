@@ -1,110 +1,78 @@
 <style>
     @keyframes marquee {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
 
     .animate-marquee {
         display: flex;
         width: max-content;
-        animation: marquee 25s linear infinite;
+        animation: marquee 30s linear infinite;
     }
 
     .animate-marquee:hover {
         animation-play-state: paused;
     }
+
+    /* Efek Glitch Tipis pada Hover */
+    .cyber-logo:hover {
+        filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.8)) drop-shadow(0 0 2px rgba(168, 85, 247, 1));
+        transform: scale(1.1) skewX(-5deg);
+    }
 </style>
 
-<div
-    class="py-12 mt-20 mb-10 bg-white dark:bg-[#0a0a20] transition-colors duration-500 overflow-hidden border-t border-slate-100 dark:border-white/5">
+<div class="py-12 bg-white dark:bg-black transition-colors duration-500 overflow-hidden border-t border-b border-gray-100 dark:border-cyan-500/20 relative">
+    
+    <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none dark:block hidden" 
+         style="background-image: radial-gradient(#06b6d4 0.5px, transparent 0.5px); background-size: 10px 10px;"></div>
 
-    <div class="text-center pt-10 mb-8">
-        <h2 class="text-slate-400 dark:text-cyan-400/60 font-medium tracking-[0.3em] uppercase text-xs">Official
-            Partners
+    <div class="text-center mb-8 relative z-10">
+        <h2 class="text-gray-400 dark:text-purple-500 font-black tracking-[0.5em] uppercase text-[10px] italic">
+            // TERMINAL_PARTNERS_LIST
         </h2>
     </div>
 
-    <div class="h-px w-full bg-linear-to-r from-transparent via-gray-700 dark:via-white/10 to-transparent"></div>
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-300 dark:via-cyan-500/50 to-transparent"></div>
 
+    <div class="py-12 relative flex items-center overflow-hidden">
+        <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white dark:from-black to-transparent z-20 pointer-events-none"></div>
+        <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-black to-transparent z-20 pointer-events-none"></div>
 
-    <div class="py-16 relative flex items-center">
-        <div
-            class="absolute inset-0 z-10 pointer-events-none 
-                    bg-linear-to-r from-white via-transparent to-white 
-                    dark:from-[#0a0a20] dark:via-transparent dark:to-[#0a0a20]">
-            <div class="animate-marquee flex items-center gap-20">
-                @php
-                    $logos = [
-                        ['nike-logo.webp', 'Nike'],
-                        ['adidas-logo.webp', 'Adidas'],
-                        ['puma-logo.webp', 'Puma'],
-                        ['aerostreet-logo.webp', 'Aerostreet'],
-                        ['nb-logo.webp', 'New Balance'],
-                        ['converse-logo.webp', 'Converse'],
-                        ['reebok-logo.webp', 'Reebok'],
-                    ];
-                @endphp
+        <div class="animate-marquee flex items-center gap-24 px-4">
+            @php
+                $logos = [
+                    ['nike-logo.webp', 'Nike'],
+                    ['adidas-logo.webp', 'Adidas'],
+                    ['puma-logo.webp', 'Puma'],
+                    ['aerostreet-logo.webp', 'Aerostreet'],
+                    ['nb-logo.webp', 'New Balance'],
+                    ['converse-logo.webp', 'Converse'],
+                    ['reebok-logo.webp', 'Reebok'],
+                ];
+                // Menggabungkan array 3 kali agar durasi animasi pas dan tidak terputus
+                $displayLogos = array_merge($logos, $logos, $logos);
+            @endphp
 
-                @foreach (array_merge($logos, $logos) as $logo)
+            @foreach ($displayLogos as $logo)
+                <div class="flex flex-col items-center group">
                     <img src="{{ asset('images/' . $logo[0]) }}"
-                        class="h-10 w-auto grayscale opacity-60 
-                            dark:invert dark:opacity-40 
+                        class="cyber-logo h-8 md:h-10 w-auto grayscale opacity-40 
+                            dark:invert dark:opacity-30 
                             hover:grayscale-0 hover:opacity-100 
                             dark:hover:opacity-100 transition-all duration-300"
                         alt="{{ $logo[1] }}">
-                @endforeach>
-                <img src="{{ asset('images/nike-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Nike">
-                <img src="{{ asset('images/adidas-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Adidas">
-                <img src="{{ asset('images/puma-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Puma">
-                <img src="{{ asset('images/aerostreet-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Aerostreet">
-                <img src="{{ asset('images/nb-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="New Balance">
-                <img src="{{ asset('images/converse-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Converse">
-                <img src="{{ asset('images/reebok-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Reebok">
-
-                <img src="{{ asset('images/nike-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Nike">
-                <img src="{{ asset('images/adidas-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Adidas">
-                <img src="{{ asset('images/puma-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Puma">
-                <img src="{{ asset('images/aerostreet-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Aerostreet">
-                <img src="{{ asset('images/nb-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="New Balance">
-                <img src="{{ asset('images/converse-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Converse">
-                <img src="{{ asset('images/reebok-logo.webp') }}"
-                    class="h-12 w-auto grayscale opacity-60 dark:invert dark:brightness-200 dark:opacity-80 transition-all"
-                    alt="Reebok">
-            </div>
+                    
+                    <span class="text-[8px] font-mono text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity mt-2 tracking-tighter">
+                        ID_{{ strtoupper(str_replace(' ', '_', $logo[1])) }}
+                    </span>
+                </div>
+            @endforeach
         </div>
-        <div class="h-px w-full bg-linear-to-r from-transparent via-gray-700 dark:via-white/10  to-transparent"></div>
     </div>
 
+    <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-gray-300 dark:via-purple-500/50 to-transparent"></div>
 
+    <div class="absolute bottom-2 right-4 hidden md:block">
+        <p class="text-[8px] font-mono text-gray-400 dark:text-cyan-500/30 uppercase">Secure_Connection: Established</p>
+    </div>
 </div>

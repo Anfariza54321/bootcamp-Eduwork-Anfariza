@@ -19,23 +19,21 @@
         
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-black">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased transition-colors duration-500">
+    <div class="min-h-screen  bg-[#050505] transition-colors duration-500">
+        @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-[#050505] shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+        @isset($header)
+    <header class=" bg-[#050505] border-b border-cyan-500/20 shadow-sm transition-colors duration-500">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $header }}
         </div>
-    </body>
+    </header>
+@endisset
+
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+</body>
 </html>

@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2
-            class="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 leading-tight">
-            {{ __('Dashboard Admin') }}
+            class="inline-block font-black text-xl uppercase italic tracking-widest bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                {{ __('Dashboard Admin') }}
         </h2>
     </x-slot>
 
