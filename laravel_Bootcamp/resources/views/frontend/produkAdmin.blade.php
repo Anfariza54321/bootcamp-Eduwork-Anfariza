@@ -16,8 +16,41 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                @if (session('error'))
+                    <div
+                        class="bg-red-500/10 border border-red-500/50 p-4 rounded-lg flex items-center justify-between animate-pulse">
+                        <div class="flex items-center">
+                            <span class="font-black text-red-500 mr-3">[!]</span>
+                            <p class="text-xs font-black uppercase tracking-widest text-red-500">
+                                {{ session('error') }}
+                            </p>
+                        </div>
+                        <button onclick="this.parentElement.remove()"
+                            class="text-red-500 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-sm">close</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div
+                        class="bg-cyan-500/10 border border-cyan-500/50 p-4 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="font-black text-cyan-500 mr-3">>></span>
+                            <p class="text-xs font-black uppercase tracking-widest text-cyan-500">
+                                {{ session('success') }}
+                            </p>
+                        </div>
+                        <button onclick="this.parentElement.remove()"
+                            class="text-cyan-500 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-sm">close</span>
+                        </button>
+                    </div>
+                @endif
+
                 <div
-                    class="bg-gray-900/50 backdrop-blur-xl border border-purple-500/20 shadow-[0_0_30px_rgba(168,85,247,0.1)] overflow-hidden sm:rounded-2xl">
+                    class="bg-gray-900/50 backdrop-blur-xl border border-purple-500/20 shadow-[0_0_30px_rgba(168,85,247,0.1)] overflow-hidden sm:rounded-2xl mt-4">
                     <div class="p-8">
 
                         <div class="flex justify-between items-center mb-8">
@@ -99,7 +132,7 @@
                                                         method="POST">
                                                         @csrf @method('DELETE')
                                                         <button type="submit"
-                                                            onclick="return confirm('Erase this data from core?')"
+                                                            onclick="return confirm('Erase this data?')"
                                                             class="p-2 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white rounded-lg transition-all duration-300">
                                                             <span
                                                                 class="material-symbols-outlined text-sm">delete_forever</span>

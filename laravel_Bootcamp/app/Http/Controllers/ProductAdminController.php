@@ -92,4 +92,27 @@ class ProductAdminController extends Controller
 
         return redirect()->route('produkAdmin')->with('success', 'Produk berhasil diupdate!');
     }
+
+    public function destroy($id)
+    {
+        try {
+
+            $product = Product::findOrFail($id);
+
+            
+            if ($product->gambar) {
+               
+                if (Storage::disk('public')->exists($product->gambar)) {
+                    Storage::disk('public')->delete($product->gambar);
+                }
+            }
+
+            $product->delete();
+
+            return redirect()->route('produkAdmin')->with('success', 'SYSTEM_DELETED: Unit data telah dimusnahkan.');
+        } catch (\Exception $e) {
+        
+            return redirect()->route('produkAdmin')->with('error', 'CRITICAL_ERROR: Gagal memusnahkan data.');
+        }
+    }
 }

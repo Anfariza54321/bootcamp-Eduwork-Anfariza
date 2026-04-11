@@ -44,14 +44,14 @@ class MerekAdminController extends Controller
 
         try {
             Merek::create([
-                'nama' => trim($request->nama), 
+                'nama' => trim($request->nama),
                 'slug' => Str::slug($request->nama),
-                'jumlah' => 0, 
+                'jumlah' => 0,
             ]);
 
             return redirect()->route('merekAdmin')->with('success', 'DATABASE_UPDATED: Merek baru telah diregistrasi.');
         } catch (\Exception $e) {
-            
+
             return back()->withInput()->with('error', 'CRITICAL_ERROR: Gagal menyimpan data ke server.');
         }
     }
@@ -71,15 +71,24 @@ class MerekAdminController extends Controller
         $merek = Merek::findOrFail($id);
         $merek->update($request->all());
 
-       
+
         return redirect()->back()->with('success', 'Merek berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        $merek = Merek::findOrFail($id);
-        $merek->delete();
+        try {
+            $merek = Merek::findOrFail($id);
 
-        return redirect()->route('merekAdmin')->with('success', 'Merek berhasil dihapus!');
+            if ($merek->products()->count() > 0) {
+                return redirect()->route('merekAdmin')->with('error', 'ACCESS_DENIED: Merek tidak bisa dihapus karena masih memiliki produk aktif.');
+            }
+
+            $merek->delete();
+
+            return redirect()->route('merekAdmin')->with('success', 'DATABASE_PURGED: Merek berhasil dimusnahkan dari sistem.');
+        } catch (\Exception $e) {
+            return redirect()->route('merekAdmin')->with('error', 'CRITICAL_ERROR: Gagal memproses pemusnahan data.');
+        }
     }
 }
