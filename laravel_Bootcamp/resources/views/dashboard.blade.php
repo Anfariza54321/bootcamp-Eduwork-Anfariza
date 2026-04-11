@@ -83,7 +83,7 @@
                     <div class="ml-4 flex items-center justify-between w-full">
                         <div>
                             <p class="text-xs uppercase tracking-widest text-yellow-500/70 font-bold">Total Klik</p>
-                            <p class="text-3xl font-black text-white tracking-tighter">0</p>
+                            <p class="text-3xl font-black text-white tracking-tighter">{{ number_format($jumlahKlik) }}</p>
                         </div>
                         <span
                             class="material-symbols-outlined text-yellow-500/30 group-hover:text-yellow-400 transition-colors text-4xl">touch_app</span>

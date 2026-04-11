@@ -11,7 +11,8 @@ class DashboardController extends Controller
     {
         $jumlahProduk = \App\Models\Product::count();
         $jumlahMerek = \App\Models\Merek::count();
-        $totalStok = \App\Models\Product::sum('stok'); // Pastikan nama kolomnya 'stok' atau 'jumlah'
+        $jumlahKlik= \App\Models\Product::sum('click');
+        $totalStok = \App\Models\Product::sum('stok');
 
         $grafikLabel = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         $grafikData = [12, 19, 3, 5, 2, 30, 25];
@@ -30,6 +31,7 @@ class DashboardController extends Controller
         return view('dashboard', compact(
             'jumlahProduk',
             'jumlahMerek',
+            'jumlahKlik',
             'totalStok',
             'recentOrders', // Tambahkan ini
             'grafikLabel',

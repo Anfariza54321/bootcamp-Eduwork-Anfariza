@@ -48,6 +48,21 @@ class ProductsController extends Controller
         return view('frontend.products', compact('products'));
     }
 
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        $sessionKey = 'viewed_product_' . $product->id;
+
+        if (!session()->has($sessionKey)) {
+            $product->increment('click');
+
+            session()->put($sessionKey, true);
+        }
+
+        return back()->with('openModalId', $product->id);
+    }
     /**
      * Show the form for creating a new resource.
      */

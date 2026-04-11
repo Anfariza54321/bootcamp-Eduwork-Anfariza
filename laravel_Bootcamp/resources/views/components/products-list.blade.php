@@ -150,9 +150,10 @@
      </div>
 
      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-         @foreach ($products as $product)
-             <div class="cyber-card group flex flex-col h-full bg-white border-2 border-gray-100 p-4 dark:border-white/5 dark:bg-gray-950 relative overflow-hidden"
-                 onclick="openProductModal('{{ $product->id }}', '{{ addslashes($product->nama) }}', '{{ number_format($product->harga, 0, ',', '.') }}', '{{ asset('storage/' . $product->gambar) }}')">
+         @foreach ($products as $item)
+         
+         <a href="{{ route('products.show', $item->slug) }}" class="block"> 
+             <div class="cyber-card group flex flex-col h-full bg-white border-2 border-gray-100 p-4 dark:border-white/5 dark:bg-gray-950 relative overflow-hidden">
 
                  <div
                      class="absolute -right-4 -top-4 text-[40px] font-black text-gray-50 dark:text-white/5 italic pointer-events-none uppercase">
@@ -161,11 +162,11 @@
                  <div
                      class="relative h-64 w-full bg-gray-50 dark:bg-black border border-transparent dark:group-hover:border-cyan-500/50 transition-colors overflow-hidden">
                      <img class="h-full w-full object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
-                         src="{{ asset('images/' . $product->gambar) }}" alt="{{ $product->nama }}" />
+                         src="{{ asset('images/' . $item->gambar) }}" alt="{{ $item->nama }}" />
 
                      <span
                          class="absolute top-0 left-0 bg-black text-white dark:bg-cyan-500 dark:text-black px-3 py-1 text-[9px] font-black uppercase tracking-tighter">
-                         {{ $product->merek->nama }}
+                         {{ $item->merek->nama }}
                      </span>
                  </div>
 
@@ -173,7 +174,7 @@
                      <div class="flex justify-between items-start mb-2">
                          <h3
                              class="text-sm font-black text-gray-900 dark:text-white uppercase italic tracking-tight group-hover:text-cyan-500 transition-colors leading-none">
-                             {{ $product->nama }}
+                             {{ $item->nama }}
                          </h3>
                          <div class="flex items-center gap-1 text-yellow-400">
                              <span class="text-[10px] font-bold">5.0</span>
@@ -182,7 +183,7 @@
 
                      <p
                          class="mb-6 text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight uppercase font-medium">
-                         {{ $product->deskripsi }}
+                         {{ $item->deskripsi }}
                      </p>
 
                      <div class="mt-auto border-t-2 border-dashed border-gray-100 dark:border-white/10 pt-4">
@@ -193,11 +194,11 @@
                                  <p
                                      class="text-xl font-black text-gray-900 dark:text-white leading-none tracking-tighter">
                                      <span
-                                         class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">IDR</span>{{ number_format($product->harga, 0, ',', '.') }}
+                                         class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">IDR</span>{{ number_format($item->harga, 0, ',', '.') }}
                                  </p>
                              </div>
                              <span class="text-[8px] font-mono text-gray-400 uppercase">Stock:
-                                 {{ $product->stok }}</span>
+                                 {{ $item->stok }}</span>
                          </div>
 
                          <div class="flex gap-2">
@@ -215,6 +216,7 @@
                      </div>
                  </div>
              </div>
+             </a>
          @endforeach
      </div>
  </div>
@@ -404,5 +406,25 @@
      </div>
  </div>
 
+@if(session('openModalId'))
+    @php
+        
+        $clickedProduct = $products->firstWhere('id', session('openModalId'));
+    @endphp
+
+    @if($clickedProduct)
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            openProductModal(
+                "{{ $clickedProduct->id }}",
+                "{{ addslashes($clickedProduct->nama) }}",
+                "{{ number_format($clickedProduct->harga, 0, ',', '.') }}",
+                "{{ asset('images/' . $clickedProduct->gambar) }}",
+                "{{ $clickedProduct->slug }}"
+            );
+        });
+    </script>
+    @endif
+@endif
 
  @vite(['resources/js/product.js'])

@@ -1,5 +1,3 @@
-
-
 window.toggleDropdown = function (id) {
     const dropdown = document.getElementById(id);
     document
@@ -12,7 +10,7 @@ window.toggleDropdown = function (id) {
     dropdown.classList.toggle("hidden");
 };
 
-window.openProductModal = function (id, name, price, image) {
+window.openProductModal = function (id, name, price, image, slug) {
     const modal = document.getElementById("product-modal");
     const form = document.getElementById("add-to-cart-form");
 
@@ -46,16 +44,14 @@ window.closeModal = function () {
     document.body.style.overflow = "auto";
 };
 
-// Gabungkan logika window.onclick
+
 window.onclick = function (event) {
     const modal = document.getElementById("product-modal");
 
-    // Tutup modal jika klik di area gelap (overlay)
     if (event.target == modal) {
         window.closeModal();
     }
 
-    // Tutup dropdown jika klik di luar button
     if (!event.target.closest("button")) {
         document
             .querySelectorAll('[id$="Modal"], [id^="dropdown"]')

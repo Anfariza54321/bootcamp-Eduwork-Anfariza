@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
-    protected $fillable = ['nama', 'slug', 'harga', 'stok', 'merek_id', 'gambar', 'deskripsi'];
+    protected $fillable = ['nama', 'slug', 'harga', 'stok', 'merek_id', 'gambar', 'deskripsi', 'click'];
 
     public function merek()
     {
