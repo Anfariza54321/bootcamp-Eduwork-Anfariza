@@ -64,15 +64,27 @@ class MerekAdminController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $request->validate([
-            'nama' => 'required|max:255|unique:merek,nama,' . $id,
+            
+            'nama' => 'required|string|max:50|min:2|unique:merek,nama,' . $id,
+        ], [
+            'nama.unique' => 'CONFLICT: Nama merek ini sudah terdaftar di sistem.',
+            'nama.max' => 'LIMIT_EXCEEDED: Nama merek terlalu panjang.',
         ]);
 
-        $merek = Merek::findOrFail($id);
-        $merek->update($request->all());
+        try {
+            $merek = Merek::findOrFail($id);
 
+            $merek->update([
+                'nama' => trim($request->nama),
+                'slug' => Str::slug($request->nama),
+            ]);
 
-        return redirect()->back()->with('success', 'Merek berhasil diperbarui!');
+            return redirect()->route('merekAdmin')->with('success', 'DATABASE_UPDATED: Profil merek telah disesuaikan.');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'CRITICAL_ERROR: Gagal memperbarui data merek.');
+        }
     }
 
     public function destroy($id)

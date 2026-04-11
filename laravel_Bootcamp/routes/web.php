@@ -43,7 +43,7 @@ Route::delete('/produkAdmin/{id}', [ProductAdminController::class, 'destroy'])->
 Route::get('/merekAdmin', [MerekAdminController::class, 'index'])->name('merekAdmin');
 Route::get('/merekAdmin/create', [MerekAdminController::class, 'create'])->name('merek.create');
 Route::post('/merekAdmin/store', [MerekAdminController::class, 'store'])->name('merek.store');
-Route::get('/merekAdmin/{id}/edit', [MerekAdminController::class, 'edit'])->name('merek.edit');
+Route::put('/merekAdmin/{id}/edit', [MerekAdminController::class, 'edit'])->name('merek.edit');
 Route::put('/merekAdmin/{id}', [MerekAdminController::class, 'update'])->name('merek.update');
 Route::delete('/merekAdmin/{id}', [MerekAdminController::class, 'destroy'])->name('merek.destroy');
 

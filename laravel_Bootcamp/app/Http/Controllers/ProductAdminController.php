@@ -75,22 +75,47 @@ class ProductAdminController extends Controller
         $produk = Product::findOrFail($id);
 
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
+            
+            'nama' => 'required|string|max:255|unique:products,nama,' . $id,
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'merek_id' => 'required|exists:merek,id',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+        ], [
+            'nama.unique' => 'CONFLICT: Nama produk sudah digunakan oleh unit lain.',
+            'merek_id.exists' => 'ERROR: Resource merek tidak valid.',
+            'harga.required' => 'error: Harga produk wajib diisi.'
         ]);
 
-        if ($request->hasFile('gambar')) {
+        try {
             
-            if ($produk->gambar) {
-                Storage::disk('public')->delete($produk->gambar);
+            $path = $produk->gambar; 
+
+            if ($request->hasFile('gambar')) {
+    
+                if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
+                    Storage::disk('public')->delete($produk->gambar);
+                }
+
+                $file = $request->file('gambar');
+                $fileName = time() . '_' . Str::slug($request->nama) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('products', $fileName, 'public');
             }
-            $produk->gambar = $request->file('gambar')->store('products', 'public');
+
+            $produk->update([
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'deskripsi' => $request->deskripsi ?? $produk->deskripsi,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'merek_id' => $request->merek_id,
+                'gambar' => $path,
+            ]);
+
+            return redirect()->route('produkAdmin')->with('success', 'SYSTEM_RECALIBRATED: Data produk berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'CRITICAL_ERROR: Gagal memperbarui data.');
         }
-
-        $produk->update($request->except('gambar') + ['gambar' => $produk->gambar]);
-
-        return redirect()->route('produkAdmin')->with('success', 'Produk berhasil diupdate!');
     }
 
     public function destroy($id)
