@@ -1,4 +1,5 @@
 <x-app-layout>
+     @section('title', 'Dashboard Admin')
     <div x-data="{ openEdit: false, editId: '', editNama: '' }" class="bg-black min-h-screen">
 
         <x-slot name="header">

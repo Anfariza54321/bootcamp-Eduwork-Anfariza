@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,21 +11,46 @@ class DashboardController extends Controller
     {
         $jumlahProduk = \App\Models\Product::count();
         $jumlahMerek = \App\Models\Merek::count();
-        $jumlahKlik= \App\Models\Product::sum('click');
+        $jumlahKlik = \App\Models\Product::sum('click');
         $totalStok = \App\Models\Product::sum('stok');
 
-        $grafikLabel = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-        $grafikData = [12, 19, 3, 5, 2, 30, 25];
+        $startOfWeek = now()->subDays(6)->startOfDay();
+        $endOfWeek = now()->endOfDay();
+
+        $ordersData = Orders::where('created_at', '>=', $startOfWeek)
+            ->selectRaw('DATE(created_at) as date, SUM(quantity) as total_qty')
+            ->groupBy('date')
+            ->get()
+            ->pluck('total_qty', 'date');
+
+        $revenueRaw = Orders::where('created_at', '>=', $startOfWeek)
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total_rev')
+            ->groupBy('date')
+            ->get()
+            ->pluck('total_rev', 'date');
+
+        $grafikLabel = [];
+        $grafikData = [];
+        $revenueData = []; 
+        $days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+        for ($i = 0; $i < 7; $i++) {
+            $date = now()->subDays(6 - $i)->format('Y-m-d');
+            $dayName = $days[date('w', strtotime($date))];
+
+            $grafikLabel[] = $dayName;
+            $grafikData[] = $ordersData[$date] ?? 0;
+
+            $revenueData[] = $revenueRaw[$date] ?? 0;
+        }
 
         $dataMerek = \App\Models\Merek::withSum('products as total_stok', 'stok')->get();
+        $pieLabel = $dataMerek->pluck('nama');
+        $pieData = $dataMerek->pluck('total_stok')->map(fn($value) => $value ?? 0);
 
-        $pieLabel = $dataMerek->pluck('nama'); // Nama-nama merek
-        $pieData = $dataMerek->pluck('total_stok')->map(fn($value) => $value ?? 0); // Total stok per merek
-
-        $recentOrders = Order::with(['user', 'product'])
-            ->where('created_at', '>=', now()->subDays(7))
+        $recentOrders = Orders::with(['user', 'product'])
             ->orderBy('created_at', 'desc')
-            ->limit(10) // Tampilkan 10 data terbaru saja
+            ->limit(10)
             ->get();
 
         return view('dashboard', compact(
@@ -33,11 +58,19 @@ class DashboardController extends Controller
             'jumlahMerek',
             'jumlahKlik',
             'totalStok',
-            'recentOrders', // Tambahkan ini
+            'recentOrders',
             'grafikLabel',
             'grafikData',
+            'revenueData',
             'pieLabel',
             'pieData'
         ));
+    }
+
+    public function history()
+    {
+        $all_orders = Orders::with(['user', 'product'])->latest()->paginate(10);
+
+        return view('frontend.ordersAdmin', compact('all_orders'));
     }
 }

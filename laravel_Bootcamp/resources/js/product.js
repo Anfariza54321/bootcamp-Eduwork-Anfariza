@@ -14,12 +14,11 @@ window.openProductModal = function (id, name, price, image, slug) {
     const modal = document.getElementById("product-modal");
     const form = document.getElementById("add-to-cart-form");
 
-    // 1. Isi tampilan modal
     document.getElementById("modal-title").innerText = name;
     document.getElementById("modal-price").innerText = "Rp " + price;
     document.getElementById("modal-img").src = image;
 
-    // 2. ISI DATA HIDDEN
+    
     document.getElementById("modal-hidden-nama").value = name;
     document.getElementById("modal-hidden-harga").value = price.replace(
         /\./g,
@@ -29,7 +28,7 @@ window.openProductModal = function (id, name, price, image, slug) {
     const imageName = image.split("/").pop();
     document.getElementById("modal-hidden-gambar").value = imageName;
 
-    // 3. Set Action URL
+    
     form.action = "/cart/add/" + id;
 
     modal.classList.remove("hidden");

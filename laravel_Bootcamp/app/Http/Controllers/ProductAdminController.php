@@ -38,12 +38,17 @@ class ProductAdminController extends Controller
         ]);
 
         try {
-            $path = null;
             if ($request->hasFile('gambar')) {
-                
-                $file = $request->file('gambar');
-                $fileName = time() . '_' . Str::slug($request->nama) . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('products', $fileName, 'public');
+                $image = $request->file('gambar');
+
+                // Buat nama file unik agar tidak bentrok
+                $name = time() . '.' . $image->getClientOriginalExtension();
+
+                // PINDAHKAN ke folder public/images (sesuai path product-list kamu)
+                $image->move(public_path('images'), $name);
+
+                // Simpan nama filenya saja ke database
+                $gambarPath = $name;
             }
 
             Product::create([
@@ -53,7 +58,7 @@ class ProductAdminController extends Controller
                 'harga' => $request->harga,
                 'stok' => $request->stok,
                 'merek_id' => $request->merek_id,
-                'gambar' => $path,
+                'gambar' => $gambarPath,
             ]);
 
             return redirect()->route('produkAdmin')->with('success', 'SYSTEM_UPDATE: Produk berhasil ditambah!');
@@ -88,18 +93,18 @@ class ProductAdminController extends Controller
         ]);
 
         try {
-            
-            $path = $produk->gambar; 
 
             if ($request->hasFile('gambar')) {
-    
-                if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
-                    Storage::disk('public')->delete($produk->gambar);
-                }
+                $image = $request->file('gambar');
 
-                $file = $request->file('gambar');
-                $fileName = time() . '_' . Str::slug($request->nama) . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('products', $fileName, 'public');
+                
+                $name = time() . '.' . $image->getClientOriginalExtension();
+
+                
+                $image->move(public_path('images'), $name);
+
+                
+                $gambarPath = $name;
             }
 
             $produk->update([
@@ -109,7 +114,7 @@ class ProductAdminController extends Controller
                 'harga' => $request->harga,
                 'stok' => $request->stok,
                 'merek_id' => $request->merek_id,
-                'gambar' => $path,
+                'gambar' => $gambarPath ?? $produk->gambar,
             ]);
 
             return redirect()->route('produkAdmin')->with('success', 'SYSTEM_RECALIBRATED: Data produk berhasil diperbarui.');

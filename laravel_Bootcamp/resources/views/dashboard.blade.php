@@ -1,8 +1,9 @@
 <x-app-layout>
+    @section('title', 'Dashboard Admin')
     <x-slot name="header">
         <h2
             class="inline-block font-black text-xl uppercase italic tracking-widest bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                {{ __('Dashboard Admin') }}
+            {{ __('Dashboard Admin') }}
         </h2>
     </x-slot>
 
@@ -83,7 +84,8 @@
                     <div class="ml-4 flex items-center justify-between w-full">
                         <div>
                             <p class="text-xs uppercase tracking-widest text-yellow-500/70 font-bold">Total Klik</p>
-                            <p class="text-3xl font-black text-white tracking-tighter">{{ number_format($jumlahKlik) }}</p>
+                            <p class="text-3xl font-black text-white tracking-tighter">{{ number_format($jumlahKlik) }}
+                            </p>
                         </div>
                         <span
                             class="material-symbols-outlined text-yellow-500/30 group-hover:text-yellow-400 transition-colors text-4xl">touch_app</span>
@@ -119,190 +121,111 @@
             </div>
 
             <div class="mt-8 bg-gray-900 border border-cyan-500/20 rounded-xl overflow-hidden shadow-2xl relative">
-    <div class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cyan-400"></div>
-    <div class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-purple-400"></div>
+                <div class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cyan-400"></div>
+                <div class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-purple-400"></div>
 
-    <div class="p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="font-black text-white uppercase tracking-widest text-sm italic">
-                Recent_Orders <span class="text-cyan-400">// Week_Protocol</span>
-            </h3>
-            <span class="text-[10px] font-mono text-purple-400 animate-pulse">AUTO_REFRESH: ENABLED</span>
-        </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-black text-white uppercase tracking-widest text-sm italic">
+                            Recent_Orders <span class="text-cyan-400">// Week_Protocol</span>
+                        </h3>
+                        <span class="text-[10px] font-mono text-purple-400 animate-pulse">AUTO_REFRESH: ENABLED</span>
+                    </div>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full border-separate border-spacing-y-2">
-                <thead>
-                    <tr class="text-gray-500 text-[10px] uppercase tracking-widest font-black">
-                        <th class="px-4 py-2 text-left">Order_ID</th>
-                        <th class="px-4 py-2 text-left">Customer</th>
-                        <th class="px-4 py-2 text-left">Product</th>
-                        <th class="px-4 py-2 text-center">Qty</th>
-                        <th class="px-4 py-2 text-left">Total</th>
-                        <th class="px-4 py-2 text-center">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- Ganti $recentOrders dengan variabel yang dikirim dari Controller --}}
-                    @forelse ($recentOrders as $order)
-                        <tr class="group bg-white/[0.03] hover:bg-cyan-500/[0.08] transition-all duration-300 border border-white/5">
-                            <td class="px-4 py-3 rounded-l-lg border-y border-l border-white/5 font-mono text-cyan-400 text-xs">
-                                #{{ $order->order_number }}
-                            </td>
-                            <td class="px-4 py-3 border-y border-white/5">
-                                <div class="text-xs font-bold text-white tracking-wide uppercase">{{ $order->user->name }}</div>
-                                <div class="text-[9px] text-gray-500 font-mono italic">UID: {{ $order->users_id }}</div>
-                            </td>
-                            <td class="px-4 py-3 border-y border-white/5">
-                                <span class="text-xs text-gray-300">{{ $order->product->nama }}</span>
-                            </td>
-                            <td class="px-4 py-3 border-y border-white/5 text-center">
-                                <span class="text-xs font-black text-purple-400">{{ $order->quantity }}</span>
-                            </td>
-                            <td class="px-4 py-3 border-y border-white/5 font-bold text-xs text-white">
-                                Rp{{ number_format($order->total) }}
-                            </td>
-                            <td class="px-4 py-3 rounded-r-lg border-y border-r border-white/5 text-center">
-                                @php
-                                    $statusColors = [
-                                        'pending' => 'bg-yellow-500/10 text-yellow-500 border-yellow-500/50',
-                                        'processing' => 'bg-blue-500/10 text-blue-500 border-blue-500/50',
-                                        'shipped' => 'bg-purple-500/10 text-purple-500 border-purple-500/50',
-                                        'delivered' => 'bg-green-500/10 text-green-500 border-green-500/50',
-                                    ];
-                                @endphp
-                                <span class="px-2 py-1 rounded text-[9px] font-black uppercase border {{ $statusColors[$order->status] ?? 'bg-gray-500/10 text-gray-500' }}">
-                                    {{ $order->status }}
-                                </span>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="px-4 py-10 text-center">
-                                <div class="text-gray-600 font-mono text-xs uppercase tracking-widest">
-                                    [ No_Orders_Detected_In_Current_Cycle ]
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-separate border-spacing-y-2">
+                            <thead>
+                                <tr class="text-gray-500 text-[10px] uppercase tracking-widest font-black">
+                                    <th class="px-4 py-2 text-left">Order_ID</th>
+                                    <th class="px-4 py-2 text-left">Customer</th>
+                                    <th class="px-4 py-2 text-left">Product</th>
+                                    <th class="px-4 py-2 text-center">Qty</th>
+                                    <th class="px-4 py-2 text-left">Total</th>
+                                    <th class="px-4 py-2 text-center">Status</th>
+                                    <th class="px-4 py-2 text-left">Method</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- Ganti $recentOrders dengan variabel yang dikirim dari Controller --}}
+                                @forelse ($recentOrders as $order)
+                                    <tr
+                                        class="group bg-white/[0.03] hover:bg-cyan-500/[0.08] transition-all duration-300 border border-white/5">
+                                        <td
+                                            class="px-4 py-3 rounded-l-lg border-y border-l border-white/5 font-mono text-cyan-400 text-xs">
+                                            #{{ $order->order_number }}
+                                        </td>
+                                        <td class="px-4 py-3 border-y border-white/5">
+                                            <div class="text-xs font-bold text-white tracking-wide uppercase">
+                                                {{ $order->user->name }}</div>
+                                            <div class="text-[9px] text-gray-500 font-mono italic">UID:
+                                                {{ $order->users_id }}</div>
+                                        </td>
+                                        <td class="px-4 py-3 border-y border-white/5">
+                                            <span class="text-xs text-gray-300">{{ $order->product->nama }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 border-y border-white/5 text-center">
+                                            <span
+                                                class="text-xs font-black text-purple-400">{{ $order->quantity }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 border-y border-white/5 font-bold text-xs text-white">
+                                            Rp{{ number_format($order->total) }}
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 rounded-r-lg border-y border-r border-white/5 text-center">
+                                            @php
+                                                $statusColors = [
+                                                    'pending' =>
+                                                        'bg-yellow-500/10 text-yellow-500 border-yellow-500/50',
+                                                    'processing' => 'bg-blue-500/10 text-blue-500 border-blue-500/50',
+                                                    'shipped' =>
+                                                        'bg-purple-500/10 text-purple-500 border-purple-500/50',
+                                                    'delivered' => 'bg-green-500/10 text-green-500 border-green-500/50',
+                                                ];
+                                            @endphp
+                                            <span
+                                                class="px-2 py-1 rounded text-[9px] font-black uppercase border {{ $statusColors[$order->status] ?? 'bg-gray-500/10 text-gray-500' }}">
+                                                {{ $order->status }}
+                                            </span>
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 border-y border-white/5 font-mono text-[10px] text-cyan-400">
+                                            {{ strtoupper($order->payment_method) }}
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="px-4 py-10 text-center">
+                                            <div class="text-gray-600 font-mono text-xs uppercase tracking-widest">
+                                                [ No_Orders_Detected_In_Current_Cycle ]
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
+@vite(['resources/js/dashboard.js'])
+
 <script>
-    // Konfigurasi Warna Cyberpunk
-    const neonCyan = 'rgba(6, 182, 212, 1)'; // Biru Cyan Neon
-    const neonPurple = 'rgba(168, 85, 247, 1)'; // Ungu Neon
-    const darkBg = '#111827'; // Background gelap sesuai tema
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        initSalesChart(
+            'penjualanChart', 
+            @json($grafikLabel), 
+            @json($revenueData), 
+            @json($grafikData)
+        );
 
-    // --- LINE CHART (Tren Penjualan) ---
-    const labelsArr = @json($grafikLabel);
-    const dataArr = @json($grafikData);
-
-    const ctx = document.getElementById('penjualanChart').getContext('2d');
-
-    // Membuat Gradient untuk Line Chart
-    const lineGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    lineGradient.addColorStop(0, 'rgba(6, 182, 212, 0.4)'); // Atas (Cyan)
-    lineGradient.addColorStop(1, 'rgba(168, 85, 247, 0)'); // Bawah (Transparan)
-
-    const penjualanChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labelsArr,
-            datasets: [{
-                label: 'Jumlah Sepatu Terjual',
-                data: dataArr,
-                backgroundColor: lineGradient, // Efek pendaran di bawah garis
-                borderColor: neonCyan, // Garis warna Cyan Neon
-                borderWidth: 4,
-                tension: 0.4,
-                fill: true,
-                pointBackgroundColor: neonCyan,
-                pointBorderColor: '#fff',
-                pointRadius: 6,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: neonPurple, // Titik berubah jadi ungu saat di-hover
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#9ca3af',
-                        font: {
-                            weight: 'bold'
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.05)'
-                    },
-                    ticks: {
-                        color: '#9ca3af'
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: '#9ca3af'
-                    }
-                }
-            }
-        }
-    });
-
-    // --- PIE CHART (Stok Merek) ---
-    const pieLabels = @json($pieLabel);
-    const pieData = @json($pieData);
-
-    const ctxPie = document.getElementById('stokPieChart').getContext('2d');
-    new Chart(ctxPie, {
-        type: 'pie',
-        data: {
-            labels: pieLabels,
-            datasets: [{
-                data: pieData,
-                backgroundColor: [
-                    'rgba(6, 182, 212, 0.8)', // Cyan Neon
-                    'rgba(168, 85, 247, 0.8)', // Purple Neon
-                    'rgba(236, 72, 153, 0.8)', // Pink Neon
-                    'rgba(59, 130, 246, 0.8)', // Blue Neon
-                    'rgba(139, 92, 246, 0.8)', // Deep Purple
-                    'rgba(34, 211, 238, 0.8)' // Sky Neon
-                ],
-                borderWidth: 2,
-                borderColor: '#000', // Border hitam agar antar slice terlihat tajam
-                hoverOffset: 20 // Slice akan menonjol keluar saat di-hover
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: '#9ca3af',
-                        padding: 20,
-                        usePointStyle: true,
-                        font: {
-                            size: 10
-                        }
-                    }
-                }
-            }
-        }
+        
+        initStockPieChart(
+            'stokPieChart', 
+            @json($pieLabel), 
+            @json($pieData)
+        );
     });
 </script>

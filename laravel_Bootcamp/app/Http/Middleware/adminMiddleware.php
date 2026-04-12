@@ -12,7 +12,7 @@ class adminMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  Closure(Request): (Response)  $next
+     * @param  Closure(Request): 
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -20,6 +20,6 @@ class adminMiddleware
             return $next($request);
         }
 
-        return redirect('/home')->with('403', 'Anda tidak memiliki akses ke halaman ini.');
+        return redirect('/')->with('403', 'Anda tidak memiliki akses ke halaman ini.');
     }
 }

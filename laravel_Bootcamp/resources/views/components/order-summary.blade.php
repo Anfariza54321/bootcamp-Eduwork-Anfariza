@@ -178,8 +178,13 @@
         </div>
 
         <div class="p-6 sm:p-8">
-            <form id="final-order-form" action="{{ route('order.store') }}" method="POST">
+            <form id="final-order-form" action="/order/store" method="POST">
                 @csrf
+                @foreach (session('cart', []) as $id => $details)
+                    <input type="hidden" name="items[{{ $id }}][id]" value="{{ $id }}">
+                    <input type="hidden" name="items[{{ $id }}][quantity]"
+                        value="{{ $details['quantity'] }}">
+                @endforeach
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
                     <div class="space-y-6">
                         <div class="space-y-2">

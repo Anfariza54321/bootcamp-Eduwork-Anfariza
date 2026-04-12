@@ -20,7 +20,7 @@
                 </span>
             </h1>
 
-            <p class="mt-6 text-sm md:text-base font-medium text-gray-700 dark:text-gray-400 border-l-2 border-cyan-500 pl-4 max-w-md tracking-tight leading-relaxed">
+            <p class="mt-6 text-sm md:text-base font-medium text-gray-700 dark:text-gray-400 border-l-2 border-cyan-500 pl-4 max-w-md tracking-tight leading-relaxed uppercase">
                 Bukan sekadar alas kaki, tapi pernyataan jati diri. Koleksi eksklusif untuk kamu yang berani tampil beda. 
                 <span class="text-purple-600 dark:text-purple-400 font-bold uppercase text-[10px] block mt-2 font-mono">[ SET_YOUR_IDENTITY_NOW ]</span>
             </p>
@@ -33,10 +33,6 @@
                     <span class="relative z-10">Get_Started_Now</span>
                 </a>
 
-                <a class="inline-block border-2 border-gray-900 dark:border-cyan-500/50 px-8 py-4 font-black text-xs uppercase tracking-widest text-gray-900 dark:text-cyan-400 hover:bg-gray-900 hover:text-white dark:hover:bg-cyan-500 dark:hover:text-black transition-all"
-                    href="#collection">
-                    View_Archive_
-                </a>
             </div>
         </div>
 

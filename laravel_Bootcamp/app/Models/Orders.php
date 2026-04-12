@@ -14,7 +14,9 @@ class Orders extends Model
         'products_id',
         'status',
         'quantity',
-        'total'
+        'total',
+        'payment_method', // Tambahkan ini
+        'account_name'
     ];
 
     public function user()
@@ -24,6 +26,6 @@ class Orders extends Model
 
     public function product()
     {
-        return $this->belongsTo(Products::class, 'products_id');
+        return $this->belongsTo(Product::class, 'products_id');
     }
 }

@@ -1,4 +1,5 @@
 <x-app-layout>
+     @section('title', 'Dashboard Admin')
     <div x-data="{
         openEdit: false,
         editId: '',
@@ -91,15 +92,17 @@
                                             <td
                                                 class="py-4 px-4 rounded-l-xl border-y border-l border-white/5 font-mono text-xs">
                                                 {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
-                                            <td class="py-4 px-4 border-y border-white/5">
+                                            <td class="px-4 py-3">
                                                 <div
-                                                    class="relative w-14 h-14 group-hover:scale-110 transition-transform duration-500">
-                                                    <div
-                                                        class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-500 rounded-lg blur-sm opacity-20 group-hover:opacity-100 transition-opacity">
-                                                    </div>
-                                                    <img src="{{ asset('storage/' . $produk->gambar) }}"
-                                                        class="relative w-14 h-14 object-cover rounded-lg border border-white/10">
+                                                    class="h-12 w-12 bg-gray-900 border border-white/5 overflow-hidden flex items-center justify-center">
+                                                    @if ($produk->gambar && file_exists(public_path('images/' . $produk->gambar)))
+                                                        <img src="{{ asset('images/' . $produk->gambar) }}"
+                                                            class="h-full w-full object-contain">
+                                                    @else
+                                                        <span class="text-[8px] text-gray-600">NULL_IMG</span>
+                                                    @endif
                                                 </div>
+                                        
                                             </td>
                                             <td
                                                 class="py-4 px-4 border-y border-white/5 font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">

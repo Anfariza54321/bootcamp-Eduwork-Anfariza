@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MerekAdminController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -24,12 +25,12 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::get('/order-summary', [CheckoutController::class, 'summary'])->name('order.summary');
+
 
 Route::post('/process-order', [CheckoutController::class, 'store'])->name('order.store');
 
-
-
+Route::get('/order-summary', [CheckoutController::class, 'summary'])->name('order.summary');
+Route::post('/order/store', [OrdersController::class, 'store'])->name('order.store')->middleware('auth');
 
 
 Route::get('/produkAdmin', [ProductAdminController::class, 'index'])->name('produkAdmin');
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/orders/history', [DashboardController::class, 'history'])->name('admin.orders.history');
 });
 
 require __DIR__.'/auth.php';

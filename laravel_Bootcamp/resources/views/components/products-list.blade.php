@@ -149,73 +149,103 @@
          </form>
      </div>
 
+     @if (session('success'))
+         <div class="bg-cyan-500/10 border border-cyan-500/50 p-4 rounded-lg flex items-center justify-between">
+             <div class="flex items-center">
+                 <span class="font-black text-cyan-500 mr-3">>></span>
+                 <p class="text-xs font-black uppercase tracking-widest text-cyan-500">
+                     {{ session('success') }}
+                 </p>
+             </div>
+             <button onclick="this.parentElement.remove()" class="text-cyan-500 hover:text-white transition-colors">
+                 <span class="material-symbols-outlined text-sm">close</span>
+             </button>
+         </div>
+     @endif
+
      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
          @foreach ($products as $item)
-         
-         <a href="{{ route('products.show', $item->slug) }}" class="block"> 
-             <div class="cyber-card group flex flex-col h-full bg-white border-2 border-gray-100 p-4 dark:border-white/5 dark:bg-gray-950 relative overflow-hidden">
-
+             <a href="{{ route('products.show', $item->slug) }}" class="block">
                  <div
-                     class="absolute -right-4 -top-4 text-[40px] font-black text-gray-50 dark:text-white/5 italic pointer-events-none uppercase">
-                     Gear</div>
+                     class="cyber-card group flex flex-col h-full bg-white border-2 border-gray-100 p-4 dark:border-white/5 dark:bg-gray-950 relative overflow-hidden">
 
-                 <div
-                     class="relative h-64 w-full bg-gray-50 dark:bg-black border border-transparent dark:group-hover:border-cyan-500/50 transition-colors overflow-hidden">
-                     <img class="h-full w-full object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
-                         src="{{ asset('images/' . $item->gambar) }}" alt="{{ $item->nama }}" />
+                     <div
+                         class="absolute -right-4 -top-4 text-[40px] font-black text-gray-50 dark:text-white/5 italic pointer-events-none uppercase">
+                         Gear</div>
 
-                     <span
-                         class="absolute top-0 left-0 bg-black text-white dark:bg-cyan-500 dark:text-black px-3 py-1 text-[9px] font-black uppercase tracking-tighter">
-                         {{ $item->merek->nama }}
-                     </span>
-                 </div>
+                     <div
+                         class="relative h-64 w-full bg-gray-50 dark:bg-black border border-transparent dark:group-hover:border-cyan-500/50 transition-colors overflow-hidden">
+                         <img class="h-full w-full object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+                             src="{{ asset('images/' . $item->gambar) }}" alt="{{ $item->nama }}" />
 
-                 <div class="flex flex-col grow pt-6">
-                     <div class="flex justify-between items-start mb-2">
-                         <h3
-                             class="text-sm font-black text-gray-900 dark:text-white uppercase italic tracking-tight group-hover:text-cyan-500 transition-colors leading-none">
-                             {{ $item->nama }}
-                         </h3>
-                         <div class="flex items-center gap-1 text-yellow-400">
-                             <span class="text-[10px] font-bold">5.0</span>
-                         </div>
+                         <span
+                             class="absolute top-0 left-0 bg-black text-white dark:bg-cyan-500 dark:text-black px-3 py-1 text-[9px] font-black uppercase tracking-tighter">
+                             {{ $item->merek->nama }}
+                         </span>
                      </div>
 
-                     <p
-                         class="mb-6 text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight uppercase font-medium">
-                         {{ $item->deskripsi }}
-                     </p>
-
-                     <div class="mt-auto border-t-2 border-dashed border-gray-100 dark:border-white/10 pt-4">
-                         <div class="flex justify-between items-end mb-4">
-                             <div>
-                                 <span
-                                     class="text-[8px] font-mono font-bold text-purple-500 uppercase tracking-tighter">Current_Value</span>
-                                 <p
-                                     class="text-xl font-black text-gray-900 dark:text-white leading-none tracking-tighter">
-                                     <span
-                                         class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">IDR</span>{{ number_format($item->harga, 0, ',', '.') }}
-                                 </p>
+                     <div class="flex flex-col grow pt-6">
+                         <div class="flex justify-between items-start mb-2">
+                             <h3
+                                 class="text-sm font-black text-gray-900 dark:text-white uppercase italic tracking-tight group-hover:text-cyan-500 transition-colors leading-none">
+                                 {{ $item->nama }}
+                             </h3>
+                             <div class="flex items-center gap-1 text-yellow-400">
+                                 <span class="text-[10px] font-bold">5.0</span>
                              </div>
-                             <span class="text-[8px] font-mono text-gray-400 uppercase">Stock:
-                                 {{ $item->stok }}</span>
                          </div>
 
-                         <div class="flex gap-2">
-                             <button type="button"
-                                 class="w-12 h-12 flex items-center justify-center border-2 border-gray-900 text-gray-900 hover:bg-black hover:text-white dark:border-cyan-500/30 dark:text-cyan-400 dark:hover:bg-cyan-500 dark:hover:text-black transition-all">
-                                 <span class="material-symbols-outlined">
-                                     shopping_cart_checkout
-                                 </span>
-                             </button>
-                             <button
-                                 class="grow bg-black text-white dark:bg-white dark:text-black text-[10px] font-black uppercase tracking-widest hover:bg-purple-600 dark:hover:bg-cyan-400 transition-colors shadow-lg">
-                                 Buy_Now_
-                             </button>
+                         <p
+                             class="mb-6 text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight uppercase font-medium">
+                             {{ $item->deskripsi }}
+                         </p>
+
+                         <div class="mt-auto border-t-2 border-dashed border-gray-100 dark:border-white/10 pt-4">
+                             <div class="flex justify-between items-end mb-4">
+                                 <div>
+                                     <span
+                                         class="text-[8px] font-mono font-bold text-purple-500 uppercase tracking-tighter">Current_Value</span>
+                                     <p
+                                         class="text-xl font-black text-gray-900 dark:text-white leading-none tracking-tighter">
+                                         <span
+                                             class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">IDR</span>{{ number_format($item->harga, 0, ',', '.') }}
+                                     </p>
+                                 </div>
+                                 <span class="text-[8px] font-mono text-gray-400 uppercase">Stock:
+                                     {{ $item->stok }}</span>
+                             </div>
+
+                             <div class="flex gap-2">
+                                 <button type="button"
+                                     class="w-12 h-12 flex items-center justify-center border-2 border-gray-900 text-gray-900 hover:bg-black hover:text-white dark:border-cyan-500/30 dark:text-cyan-400 dark:hover:bg-cyan-500 dark:hover:text-black transition-all">
+                                     <span class="material-symbols-outlined">
+                                         shopping_cart_checkout
+                                     </span>
+                                 </button>
+                                 <button
+                                     class="grow bg-transparent border-2 border-purple-600 
+               text-purple-500 text-[10px] font-mono font-black uppercase tracking-[0.2em] 
+               relative overflow-hidden group transition-all duration-300
+               hover:bg-purple-600 hover:text-white hover:shadow-[0_0_20px_rgba(168,85,247,0.8)]
+               active:scale-95 shadow-lg">
+
+                                     <span
+                                         class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                     <span
+                                         class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+
+                                     <span class="relative z-10 group-hover:italic transition-all">
+                                         Buy_Now_
+                                     </span>
+
+                                     <div
+                                         class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_2px] pointer-events-none">
+                                     </div>
+                                 </button>
+                             </div>
                          </div>
                      </div>
                  </div>
-             </div>
              </a>
          @endforeach
      </div>
@@ -406,25 +436,38 @@
      </div>
  </div>
 
-@if(session('openModalId'))
-    @php
-        
-        $clickedProduct = $products->firstWhere('id', session('openModalId'));
-    @endphp
+ @if (session('openModalId'))
+     @php
 
-    @if($clickedProduct)
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            openProductModal(
-                "{{ $clickedProduct->id }}",
-                "{{ addslashes($clickedProduct->nama) }}",
-                "{{ number_format($clickedProduct->harga, 0, ',', '.') }}",
-                "{{ asset('images/' . $clickedProduct->gambar) }}",
-                "{{ $clickedProduct->slug }}"
-            );
-        });
-    </script>
-    @endif
-@endif
+         $clickedProduct = $products->firstWhere('id', session('openModalId'));
+     @endphp
+
+     @if ($clickedProduct)
+         <script>
+             document.addEventListener('DOMContentLoaded', function() {
+                 openProductModal(
+                     "{{ $clickedProduct->id }}",
+                     "{{ addslashes($clickedProduct->nama) }}",
+                     "{{ number_format($clickedProduct->harga, 0, ',', '.') }}",
+                     "{{ asset('images/' . $clickedProduct->gambar) }}",
+                     "{{ $clickedProduct->slug }}"
+                 );
+             });
+         </script>
+     @endif
+ @endif
+
+ @if (session('wa_link'))
+     <div class="fixed bottom-10 right-10 z-[9999] animate-in fade-in slide-in-from-bottom-5 duration-500">
+         <a href="{{ session('wa_link') }}" target="_blank"
+             class="flex items-center gap-3 bg-[#22c55e] text-black px-6 py-4 font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:bg-white hover:scale-105 transition-all group">
+             <span class="relative flex h-3 w-3">
+                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                 <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+             </span>
+             >> HUBUNGI_ADMIN_VIA_WA
+         </a>
+     </div>
+ @endif
 
  @vite(['resources/js/product.js'])
