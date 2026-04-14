@@ -32,14 +32,14 @@
                                     <p class="text-[9px] font-mono text-cyan-500 uppercase leading-none">Logged_As:</p>
                                     <p class="text-sm font-black text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
                                 </div>
-                                <a href="{{ url('/dashboard') }}" class="font-black text-gray-900 dark:text-white uppercase tracking-tighter">Admin_Dashboard</a>
+                                <a href="{{ route('admin.dashboard') }}" class="font-black text-gray-900 dark:text-white uppercase tracking-tighter">Admin_Dashboard</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="font-black text-red-600 uppercase tracking-tighter w-full text-left">Terminate_Session</button>
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="font-black text-gray-900 dark:text-white uppercase tracking-tighter">Sign_In</a>
-                                <a href="{{ route('register') }}" class="font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-tighter">Join_The_Network</a>
+                                <a href="{{ route('register') }}" class="font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-tighter">Register</a>
                             @endauth
                         </div>
                     </div>
